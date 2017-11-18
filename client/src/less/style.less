@@ -1,0 +1,127 @@
+@footerFontColor: #ffffff;
+@footerBgColor: #333333;
+@footerLinkColor: #ffffff;
+
+
+html,
+body {
+  height: 100%;
+  // background-color: #CAC7C6;
+}
+
+/*
+ * Margins
+ */
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.ml-0 {
+    margin-left: 0px;
+}
+
+.pl-0 {
+    padding-left: 0px;
+}
+
+.mr-0 {
+    margin-right: 0px;
+}
+
+.pr-0 {
+    padding-right: 0px;
+}
+
+/*
+Position
+ */
+
+.image-center {
+    margin: 0px auto;
+}
+
+.navbar {
+    // background-color: #303B4D;
+    background-image: linear-gradient(to bottom, #303b4d, #070f1a);
+    border: 0px;
+    border-radius: 0px;
+    box-shadow: 0px 0px 6px #333333;
+    color: #e7e7e7;
+    margin-bottom: 0px;
+
+    .navbar-brand {
+        color: #e7e7e7;
+        font-weight: bold;
+    }
+
+    li a.nav-link {
+        color: #e7e7e7;
+    }
+
+    li a.nav-link:hover {
+        color: #c3c3c3;
+    }
+
+    li a.active.nav-link {
+        background-image: linear-gradient(to bottom, #e7e7e7, #c3c3c3);
+    }
+
+    .navbar-collapse {
+        border-top: 0px;
+    }
+
+    ul.dropdown-menu li a.nav-link {
+        color: #555555;
+    }
+}
+
+.container-fluid {
+    margin-bottom: 150px;
+    margin-left: 0px;
+    margin-right: 0px;
+    min-height: calc(~'100vh - 200px');
+    padding: 0px;
+}
+
+.footer {
+    align-items: center;
+    background-color: @footerBgColor;
+    color: @footerFontColor;
+    display: flex;
+    height: 150px;
+    justify-content: center;
+    margin-top: -150px; /* negative value of footer height */
+    overflow: auto;
+
+    a {
+        color: @footerLinkColor;
+    }
+
+    .block.site-footer {
+        text-align: center;
+
+        ul {
+            padding: 0px;
+
+            li {
+                display: inline;
+                list-style: none;
+                margin-right: 10px;
+
+                a:link {
+                    font-weight: bold;
+                    text-decoration: none;
+                }
+            }
+
+            li:last-child {
+                margin-right: 0px;
+            }
+        }
+    }
+ }

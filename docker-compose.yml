@@ -1,0 +1,57 @@
+version: "3"
+services:
+    ramverk2_chat_latest:
+      build:
+        context: .
+        dockerfile: docker/Dockerfile_node9
+      user: "node"
+      working_dir: /home/node/app
+      environment:
+        - NODE_ENV=production
+      volumes:
+        - ./:/home/node/app
+      ports:
+        - "8000:3000"
+      command: "npm start"
+
+    ramverk2_chat_node9:
+      build:
+        context: .
+        dockerfile: docker/Dockerfile_node9
+      user: "node"
+      working_dir: /home/node/app
+      environment:
+        - NODE_ENV=production
+      volumes:
+        - ./:/home/node/app
+      ports:
+        - "8009:3000"
+      command: "npm start"
+
+    ramverk2_chat_node8:
+      build:
+        context: .
+        dockerfile: docker/Dockerfile_node8
+      user: "node"
+      working_dir: /home/node/app
+      environment:
+        - NODE_ENV=production
+      volumes:
+        - ./:/home/node/app
+      ports:
+        - "8008:3000"
+      command: "npm start"
+
+    ramverk2_chat_node6:
+      build:
+        context: .
+        dockerfile: docker/Dockerfile_node6
+      user: "node"
+      working_dir: /home/node/app
+      environment:
+        - NODE_ENV=production
+      volumes:
+        - ./:/home/node/app
+      ports:
+        - "8006:3000"
+      command: "npm start"

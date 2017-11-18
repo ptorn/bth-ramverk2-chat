@@ -1,0 +1,26 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-markdown": "^2.5.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.16"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "install-less": "lessc --clean-css src/less/style.less public/style.min.css",
+    "validate-less": "lesshint src/less/style.less"
+  },
+  "proxy": "http://localhost:3001",
+  "devDependencies": {
+    "less": "^2.7.3",
+    "less-plugin-clean-css": "^1.5.1",
+    "lesshint": "^4.3.0"
+  }
+}
