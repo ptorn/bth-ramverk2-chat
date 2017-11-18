@@ -19,7 +19,9 @@ const Navbar = () => {
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                             </button>
-                            <Link to="/" className="navbar-brand">Peder Tornberg - Ramverk2-Chat</Link>
+                            <Link to="/" className="navbar-brand">
+                                Peder Tornberg - Ramverk2-Chat
+                            </Link>
                         </div>
 
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
