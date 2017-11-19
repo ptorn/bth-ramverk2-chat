@@ -1,33 +1,19 @@
 "use strict";
 
 /**
- * A user module.
- *
- * @module
+ * Create a User
+ * @param  {string} userName  username
+ * @param  {string} firstName firstname
+ * @param  {string} lastName  lastname
+ * @return {object}           a user.
  */
-
-class User {
-    /**
-     * @constructor
-     *
-     * @param userName
-     * @param firstName
-     * @param lastName
-     */
-    constructor(userName, firstName, lastName) {
-        this.userName = userName;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-
-
-    /**
-     * Get the full users name.
-     * @return {string} First and lastname.
-     */
+const createUser = ({userName, firstName, lastName}) => ({
+    userName,
+    firstName,
+    lastName,
     getUserFullName() {
-        return this.firstName + " " + this.lastName;
+        return firstName + " " + lastName;
     }
-}
-module.exports = User;
+});
+
+module.exports = createUser;
