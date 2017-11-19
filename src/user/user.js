@@ -11,6 +11,13 @@ const createUser = ({userName, firstName, lastName}) => ({
     userName,
     firstName,
     lastName,
+
+
+
+    /**
+     * Get the users full name
+     * @return {string} First and lastname.
+     */
     getUserFullName() {
         return firstName + " " + lastName;
     }
