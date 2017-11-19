@@ -15,9 +15,10 @@
     "install-client": "cd client && npm install",
     "build-client": "cd client && npm run install-less && npm run build",
     "report-codecov": "nyc report --reporter=lcov > coverage.lcov && codecov",
-    "test1": "docker-compose run ramverk2_chat_latest npm test",
-    "test2": "docker-compose run ramverk2_chat_node9 npm test",
-    "test3": "docker-compose run ramverk2_chat_node8 npm test"
+    "test1": "docker-compose run ramverk2_chat_latest_test",
+    "test2": "docker-compose run ramverk2_chat_node9_test",
+    "test3": "docker-compose run ramverk2_chat_node8_test",
+    "docker-start": "docker-compose run -p 3000:3000 ramverk2_chat_latest"
   },
   "dependencies": {
     "body-parser": "~1.18.2",

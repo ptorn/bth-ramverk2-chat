@@ -5,4 +5,3 @@ RUN npm install
 COPY . .
 RUN npm run install-client && npm run build-client
 EXPOSE 3000
-CMD [ "npm", "start" ]
