@@ -1,7 +1,16 @@
 FROM node:6-alpine
-WORKDIR /usr/src/app
+
+USER node
+RUN mkdir -p /home/node/app
+WORKDIR /home/node/app
 COPY package.json package-lock.json ./
-RUN npm install
+
+USER root
 COPY . .
+RUN chown -R node:node /home/node/app
+
+USER node
+RUN npm install
 RUN npm run install-client && npm run build-client
+
 EXPOSE 3000

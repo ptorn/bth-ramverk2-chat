@@ -10,6 +10,8 @@ services:
         - NODE_ENV=production
       volumes:
         - ./:/home/node/app
+        - /home/node/app/node_modules
+        - /home/node/app/client/node_modules
       ports:
         - "8000:3000"
       command: "npm start"
@@ -24,6 +26,8 @@ services:
         - NODE_ENV=production
       volumes:
         - ./:/home/node/app
+        - /home/node/app/node_modules
+        - /home/node/app/client/node_modules
       ports:
         - "8009:3000"
       command: "npm start"
@@ -38,6 +42,8 @@ services:
         - NODE_ENV=production
       volumes:
         - ./:/home/node/app
+        - /home/node/app/node_modules
+        - /home/node/app/client/node_modules
       ports:
         - "8008:3000"
       command: "npm start"
@@ -52,6 +58,8 @@ services:
         - NODE_ENV=production
       volumes:
         - ./:/home/node/app
+        - /home/node/app/node_modules
+        - /home/node/app/client/node_modules
       ports:
         - "8006:3000"
       command: "npm start"
@@ -59,15 +67,17 @@ services:
     ramverk2_chat_latest_test:
       build:
         context: .
-        dockerfile: docker/Dockerfile_node9
+        dockerfile: docker/Dockerfile_node_latest
       user: "node"
       working_dir: /home/node/app
       environment:
         - NODE_ENV=production
       volumes:
         - ./:/home/node/app
+        - /home/node/app/node_modules
+        - /home/node/app/client/node_modules
       ports:
-        - "3000:3000"
+        - "3001:3000"
       command: "npm test"
 
     ramverk2_chat_node9_test:
@@ -80,8 +90,10 @@ services:
         - NODE_ENV=production
       volumes:
         - ./:/home/node/app
+        - /home/node/app/node_modules
+        - /home/node/app/client/node_modules
       ports:
-        - "3000:3000"
+        - "3002:3000"
       command: "npm test"
 
     ramverk2_chat_node8_test:
@@ -94,6 +106,8 @@ services:
         - NODE_ENV=production
       volumes:
         - ./:/home/node/app
+        - /home/node/app/node_modules
+        - /home/node/app/client/node_modules
       ports:
-        - "3000:3000"
+        - "3003:3000"
       command: "npm test"
