@@ -6,8 +6,6 @@ node_js:
 
 before_script:
     - npm install
-    - npm run install-client
-    - npm run build-client
 
 script:
     - npm test

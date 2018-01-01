@@ -20,7 +20,7 @@ const Navbar = () => {
                                 <span className="icon-bar"></span>
                             </button>
                             <Link to="/" className="navbar-brand">
-                                Peder Tornberg - Ramverk2-Chat
+                                Gomoku - peto16
                             </Link>
                         </div>
 
@@ -31,7 +31,7 @@ const Navbar = () => {
                                         title="Start"
                                         className="nav-link"
                                     >
-                                        <i className="fa fa-home"></i> Start
+                                        <i className="fa fa-home"></i> Game Room
                                     </Link>
                                 </li>
                                 <li className="nav-item">
@@ -39,7 +39,7 @@ const Navbar = () => {
                                         title="Om"
                                         className="nav-link"
                                     >
-                                        <i className="fa fa-question-circle"></i> Om
+                                        <i className="fa fa-question-circle"></i> About
                                     </Link>
                                 </li>
                             </ul>

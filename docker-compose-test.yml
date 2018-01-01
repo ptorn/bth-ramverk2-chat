@@ -1,0 +1,49 @@
+version: "3"
+services:
+    ramverk2_gomoku_latest_test:
+      build:
+        context: .
+        dockerfile: docker/Dockerfile_node_latest
+      user: "node"
+      working_dir: /home/node/app
+      environment:
+        - NODE_ENV=production
+      volumes:
+        - ./:/home/node/app
+        - /home/node/app/node_modules
+        - /home/node/app/client/node_modules
+      ports:
+        - "3001:3000"
+      command: "npm test"
+
+    ramverk2_gomoku_node9_test:
+      build:
+        context: .
+        dockerfile: docker/Dockerfile_node9
+      user: "node"
+      working_dir: /home/node/app
+      environment:
+        - NODE_ENV=production
+      volumes:
+        - ./:/home/node/app
+        - /home/node/app/node_modules
+        - /home/node/app/client/node_modules
+      ports:
+        - "3002:3000"
+      command: "npm test"
+
+    ramverk2_gomoku_node8_test:
+      build:
+        context: .
+        dockerfile: docker/Dockerfile_node8
+      user: "node"
+      working_dir: /home/node/app
+      environment:
+        - NODE_ENV=production
+      volumes:
+        - ./:/home/node/app
+        - /home/node/app/node_modules
+        - /home/node/app/client/node_modules
+      ports:
+        - "3003:3000"
+      command: "npm test"

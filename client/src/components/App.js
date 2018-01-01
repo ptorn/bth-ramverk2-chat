@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Home from './pages/Home';
+import Gomoku from './pages/Gomoku';
 import About from './pages/About';
 
 class App extends Component {
@@ -9,9 +9,8 @@ class App extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route exact path='/' component={Home}/>
+                    <Route exact path='/' component={Gomoku}/>
                     <Route path='/about' component={About}/>
-                    {/* both /roster and /roster/:number begin with /roster */}
                 </Switch>
             </Router>
         );

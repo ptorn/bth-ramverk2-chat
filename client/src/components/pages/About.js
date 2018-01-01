@@ -5,7 +5,7 @@ const About = () => {
     return (
         <Layout>
             <div>
-                <h1>Om Ramverk2-Chat</h1>
+                <h1>Om Ramverk2-Gomoku</h1>
                 <p>
                     Detta är min chat-applikation som är byggd som en del
                     i Ramverk2 kursen på BTH

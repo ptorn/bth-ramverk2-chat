@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <div className="footer">
             <div className="footer-author">
-                Peder Tornberg - Ramverk2-Chat
+                Peder Tornberg - Ramverk2-Gomoku
             </div>
         </div>
     );

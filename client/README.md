@@ -1,4 +1,4 @@
-BTH-Ramverk2-Chat
+BTH-Ramverk2-Gomoku
 ========================
 
-This is the client for my bth-ramverk2-chat.
+This is the client for my bth-ramverk2-gomoku.
