@@ -14,7 +14,7 @@
     "posttest": "npm run eslint && npm run stylelint",
     "test": "nyc --reporter=html --reporter=text mocha 'test/**/*.js' --exit",
     "test-watch": "nyc --reporter=html --reporter=text mocha 'test/**/*.js' --watch",
-    "test-scrutinizer": "nyc --all --reporter=clover mocha test/**/*.js",
+    "test-scrutinizer": "nyc --all --reporter=clover mocha 'test/**/*.js' --exit",
     "validate": "npm run eslint && npm run stylelint && cd client && npm run validate-less",
     "report-codecov": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "start-docker": "docker-compose up -d",
