@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 export default class GomokuSidebar extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <div>
@@ -20,7 +17,7 @@ export default class GomokuSidebar extends Component {
                 {
                     this.props.game.player !== null &&
                     <div className="col-md-4">
-                        <img src="images/wizard-side.png" />
+                        <img src="images/wizard-side.png" alt="Wizard"/>
                     </div>
                 }
             </div>
