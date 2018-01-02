@@ -2,16 +2,13 @@
 
 const wsServer = require("../websocket/ws-server");
 const board = require('../gomoku/gomoku-board');
+const users = require('../gomoku/gomoku-users');
 
-let users = {
-    type: "usersList",
-    users: []
-};
+// let users = {
+//     type: "usersList",
+//     users: []
+// };
 
-let playersGame = {
-    Player1: null,
-    Player2: null
-};
 
 
 /**
@@ -27,7 +24,7 @@ function handleMessage(message, wss, ws) {
 
     switch (data.type) {
         case "createUser":
-            createUser(data.user.nick);
+            users.createUser(data.user.nick);
             ws.nick = data.user.nick;
             broadcastAllJSON({
                 type: "userList",
@@ -67,7 +64,7 @@ function handleMessage(message, wss, ws) {
                     game: {
                         size: board.size,
                         board: board.board,
-                        players: playersGame,
+                        players: board.playersGame,
                         winner: board.winner,
                         currentPlayer: board.player,
                     }
@@ -94,17 +91,13 @@ function handleMessage(message, wss, ws) {
             }, wss);
             break;
         case "createGame":
-            playersGame = {
-                Player1: null,
-                Player2: null
-            };
             board.init(data.size);
             board.start();
             broadcastAllJSON({
                 type: "gameStart",
                 size: board.size,
                 board: board.board,
-                players: playersGame,
+                players: board.playersGame,
                 winner: board.winner
             }, wss);
             break;
@@ -131,12 +124,12 @@ function handleMessage(message, wss, ws) {
             }
             break;
         case "setPlayer":
-            var status = 0;
+            var status = 1;
 
-            if (playersGame['Player' + data.playerId] === null &&
-                Object.values(playersGame).indexOf(ws.nick) === -1) {
-                playersGame['Player' + data.playerId] = ws.nick;
-                status = 1;
+            try {
+                board.setPlayer(data.playerId, ws.nick);
+            } catch (error) {
+                status = 0;
             }
             broadcastClientJSON({
                 type: "setPlayer",
@@ -150,7 +143,7 @@ function handleMessage(message, wss, ws) {
                     time: Date.now(),
                     message: ws.nick + " has entered the game as Player " + data.playerId
                 },
-                players: playersGame
+                players: board.playersGame
             }, wss);
             break;
         default:
@@ -171,9 +164,9 @@ function handleError(error) {
 
 
 /**
- * [handleClose description]
- * @param  {string} code   Error code
- * @param  {string} reason Error reason
+ * Handle the close function.
+ * @param  {string} wss   WebSocket server
+ * @param  {string} ws    WebSocket
  * @return {void}
  */
 function handleClose(wss, ws) {
@@ -193,21 +186,6 @@ function handleClose(wss, ws) {
         users: users.users
     }, wss);
     console.log("User %s has left the chat.", ws.nick);
-}
-
-
-
-/**
- * Create user
- * @param  {string} user username
- * @return {void}
- */
-function createUser(user) {
-    if (users.users.indexOf(user) !== -1) {
-        throw Error("Nickname is already taken!");
-    }
-    users.users.push(user);
-    console.log("User %s is created", user);
 }
 
 
@@ -251,9 +229,9 @@ function broadcastExceptJSON(data, wss, ws) {
 
 
 /**
- * ChatServer object
+ * GomokuServer object
  * @param  {object} httpServer HttpServer object.
- * @return {object}            ChatServer object.
+ * @return {object}            GomokuServer object.
  */
 const gomokuServer = (httpServer) => {
     return {

@@ -5,7 +5,10 @@ let board = {
     board: [],
     player: 0,
     winner: null,
-
+    playersGame: {
+        Player1: null,
+        Player2: null
+    },
 
 
     /**
@@ -201,6 +204,16 @@ let board = {
                 return true;
             default:
                 return false;
+        }
+    },
+
+    setPlayer: function(id, nick) {
+        if (this.playersGame['Player' + id] === null &&
+            Object.values(this.playersGame).indexOf(nick) === -1) {
+            this.playersGame['Player' + id] = nick;
+            return id;
+        } else {
+            throw new Error("Could not set player.");
         }
     }
 };

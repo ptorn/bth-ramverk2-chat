@@ -20,6 +20,22 @@ describe('Test Gomoku Board.', function () {
             expect(() => { board.init(5); }).to.throw();
         });
     });
+    describe('Player data', () => {
+        it('Before Set Player', () => {
+            expect(board.playersGame.Player1).to.equal(null);
+        });
+        it('Check Set Player return.', () => {
+            let value = board.setPlayer(1, "James");
+
+            expect(value).to.equal(1);
+        });
+        it('Check added player.', () => {
+            expect(board.playersGame.Player1).to.equal("James");
+        });
+        it('Try to add user when no space.', () => {
+            expect(() => {board.setPlayer(1, "James");}).to.throw();
+        });
+    });
     describe('Board methods.', () => {
         before(() => {
             board.init(10);

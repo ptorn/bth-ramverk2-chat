@@ -117,6 +117,9 @@ export default class Gomoku extends Component {
     }
 
     connect(content) {
+        if (content === "") {
+            throw Error("Field is empty!");
+        }
         if (this.state.chat.users.indexOf(content) !== -1) {
             throw Error("Nick is already taken!");
         }
@@ -184,7 +187,7 @@ export default class Gomoku extends Component {
                 <div className="mb-20">
                     <h1>BTH-Gomoku</h1>
                     { this.state.game.player !== null &&
-                    <div className="col-md-6 pl-0 pr-0">
+                    <div className="col-md-7 pl-0 pr-0">
                         { this.state.game.board.length === 0 &&
                         <button onClick={() => { this.start(20); }} >Create game</button>
                         }
