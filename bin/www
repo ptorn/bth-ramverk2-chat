@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug');
 var http = require('http');
-const gomokuServer = require("../src/gomoku/gomoku-wsserver");
+const gomokuServer = require("../src/gomoku/ws-server");
 
 /**
  * Get port from environment and store in Express.

@@ -29,8 +29,9 @@ export default class Gomoku extends Component {
                 board: [],
                 size: 0,
                 winner: null,
-                currentPlayer: null
+                currentPlayer: null,
             },
+            history: [],
             chat: {
                 users: [],
                 messages: []
@@ -61,21 +62,22 @@ export default class Gomoku extends Component {
 
                     this.setState((previousState) => {
                         previousState.chat.users = data.users;
+                        previousState.chat.messages.push(data.message);
                         previousState.game.board = data.game.board;
                         previousState.game.size = data.game.size;
                         previousState.game.winner = data.game.winner;
                         previousState.game.player = "spectator";
                         previousState.game.players = data.game.players;
-                        previousState.chat.messages.push(data.message);
+                        previousState.history = data.history;
                         return previousState;
                     });
                 }
                 if (data.type === "gameStart") {
                     this.setState((previousState) => {
-                        previousState.game.board = data.board;
-                        previousState.game.size = data.size;
-                        previousState.game.winner = data.winner;
-                        previousState.game.players = data.players;
+                        previousState.game.board = data.game.board;
+                        previousState.game.size = data.game.size;
+                        previousState.game.winner = data.game.winner;
+                        previousState.game.players = data.game.players;
                         return previousState;
                     });
                 }
@@ -98,10 +100,10 @@ export default class Gomoku extends Component {
                 if (data.type === "gamePlay") {
                     this.setState((previousState) => {
                         return previousState.game = {
-                            board: data.board,
-                            size: data.size,
-                            winner: data.winner,
-                            currentPlayer: data.currentPlayer,
+                            board: data.game.board,
+                            size: data.game.size,
+                            winner: data.game.winner,
+                            currentPlayer: data.game.currentPlayer,
                             player: previousState.game.player,
                             players: previousState.game.players
                         };
@@ -198,13 +200,18 @@ export default class Gomoku extends Component {
                         />
                     </div>
                     }
-                    <GomokuSidebar setPlayer={this.setPlayer} game={this.state.game} />
+                    <GomokuSidebar
+                        setPlayer={this.setPlayer}
+                        game={this.state.game}
+                        history={this.state.history}
+                    />
                     <Chat
                         connect={this.connect}
                         users={this.state.chat.users}
                         messages={this.state.chat.messages}
                         connected={this.state.connected}
-                        sendMessage={this.sendMessage}/>
+                        sendMessage={this.sendMessage}
+                    />
                 </div>
             </Layout>
         );

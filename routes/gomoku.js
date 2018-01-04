@@ -2,8 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
-const gomokuController = require('../src/gomoku/gomoku-controller');
-const board = require('../src/gomoku/gomoku-board');
+const gomokuController = require('../src/gomoku/controller');
+const board = require('../src/gomoku/board');
 
 router.use(function (req, res, next) {
     req.board = board;

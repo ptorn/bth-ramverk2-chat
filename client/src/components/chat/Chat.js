@@ -47,13 +47,13 @@ export default class Chat extends Component {
 
         node.scrollIntoView({ behavior: "smooth" });
     }
-    componentDidMount() {
-        this.scrollToBottom();
-    }
+    // componentDidMount() {
+    //     this.scrollToBottom();
+    // }
 
-    componentDidUpdate() {
-        this.scrollToBottom();
-    }
+    // componentDidUpdate() {
+    //     this.scrollToBottom();
+    // }
     render() {
         let usersList = this.props.users.map((item, id) => {
             return <UserName key={id} item={item} number={id} />;
