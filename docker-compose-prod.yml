@@ -4,7 +4,8 @@ services:
         image: ptorn/bth-ramverk2-gomoku:latest
 
         environment:
-            - DBWEBB_DSN=mongodb://mongodb:27017/ramverk2
+            - DBWEBB_DSN=mongodb://mongodb:27018/ramverk2
+            - DBWEBB_PORT=4000
         user: "node"
         working_dir: /home/node/app
         # volumes:
@@ -24,5 +25,5 @@ services:
         volumes:
             - ./data/db:/data/db
         ports:
-            - 27017:27017
+            - 27018:27018
         command: mongod

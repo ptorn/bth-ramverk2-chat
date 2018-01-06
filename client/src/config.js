@@ -1,6 +1,6 @@
 const Config = {
-    // wsServer: "ptorn.se:3000"
-    wsServer: "localhost:3001"
+    wsServer: "ptorn.se:4000"
+    // wsServer: "localhost:3001"
 };
 
 module.exports = Config;
