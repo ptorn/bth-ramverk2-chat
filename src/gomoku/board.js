@@ -231,8 +231,6 @@ let board = {
     playerSurrender: function(nick) {
         let surrender = this.getPlayerId(nick);
 
-        console.log(surrender);
-
         if (surrender === false) {
             return false;
         }
@@ -240,8 +238,6 @@ let board = {
             if (this.playersGame.Player2 === null) {
                 return false;
             }
-            console.log(this.playersGame.Player2);
-
             this.winner = 2;
             return true;
         } else {

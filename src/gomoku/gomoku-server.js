@@ -15,7 +15,6 @@ let roomData = {};
  */
 
 async function handleMessage(message, wss, ws) {
-    console.log("Received: %s", message);
     let data = JSON.parse(message);
 
     updateRoomData();
@@ -189,7 +188,6 @@ async function handleClose(wss, ws) {
     }
     roomData.type = "updateRoom";
     await broadcastExceptJSON(roomData, wss);
-    console.log("User %s has left the chat.", ws.nick);
 }
 
 

@@ -16,7 +16,6 @@ let users = {
             throw Error("Nickname is already taken!");
         }
         this.users.push(user);
-        console.log("User %s is created", user);
     }
 };
 

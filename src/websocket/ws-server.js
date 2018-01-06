@@ -9,7 +9,6 @@ const WebSocket = require("ws");
  */
 const wsServer = (config) => {
     const handleProtocols = (protocols /*, request */) => {
-        console.log(`Incoming protocol requests '${protocols}'.`);
         for (var i = 0; i < protocols.length; i++) {
             if (protocols[i] === "text") {
                 return "text";
@@ -54,8 +53,6 @@ const wsServer = (config) => {
             ws.isAlive = true;
         };
 
-        console.log("Connection received. Adding client.");
-        // wss.broadcastExcept(ws, `New client connected (${wss.clients.size}).`);
         ws.isAlive = true;
         ws.on("message", (message) => {
             messageHandler(message, wss, ws);
@@ -71,27 +68,19 @@ const wsServer = (config) => {
 
     // Broadcast data to everyone except one self (ws).
     wss.broadcastExcept = (ws, data) => {
-        let clients = 0;
-
         wss.clients.forEach((client) => {
             if (client !== ws && client.readyState === WebSocket.OPEN) {
-                clients++;
                 client.send(data);
             }
         });
-        console.log(`Broadcasted data to ${clients} (${wss.clients.size}) clients.`);
     };
 
     wss.broadcastAll = (data) => {
-        let clients = 0;
-
         wss.clients.forEach((client) => {
             if (client.readyState === WebSocket.OPEN) {
-                clients++;
                 client.send(data);
             }
         });
-        console.log(`Broadcasted data to ${clients} (${wss.clients.size}) clients.`);
     };
 
 
@@ -99,8 +88,6 @@ const wsServer = (config) => {
     setInterval(function ping() {
         wss.clients.forEach(function each(ws) {
             if (ws.isAlive === false) {
-                console.log("die");
-                console.log(ws.nick);
                 return ws.terminate();
             }
             ws.isAlive = false;
