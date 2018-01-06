@@ -37,7 +37,12 @@ describe('Test Gomoku Board.', function () {
         });
     });
     describe('Board methods.', () => {
-        before(() => {
+        // before(() => {
+        //     board.init(10);
+        //     board.start();
+        // });
+        beforeEach(() => {
+            board.reset();
             board.init(10);
             board.start();
         });
@@ -51,21 +56,18 @@ describe('Test Gomoku Board.', function () {
             expect(() => { board.getPosition(1, 11); }).to.throw();
         });
         it('Place a marker.', () => {
-            let placed = board.placeMarker(5, 5);
-
-            expect(placed).to.be.true;
+            expect(board.placeMarker(5, 5)).to.be.true;
             expect(board.board[55]).to.equal(1);
             expect(() => { board.placeMarker(11, 11); }).to.throw();
         });
         it('Place a marker on a taken spot.', () => {
+            board.placeMarker(5, 5);
             expect(() => { board.placeMarker(5, 5); }).to.throw();
         });
         it('Check next player.', () => {
-            let placed = board.placeMarker(5, 6);
-
-            expect(board.player).to.equal(2);
-            expect(placed).to.be.true;
             expect(board.player).to.equal(1);
+            expect(board.placeMarker(5, 6)).to.be.true;
+            expect(board.player).to.equal(2);
         });
     });
     describe('Game play', () => {
