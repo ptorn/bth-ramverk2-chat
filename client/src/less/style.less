@@ -80,6 +80,10 @@ Position
     }
 }
 
+button {
+    font-weight: bold;
+}
+
 .root {
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -124,13 +128,55 @@ Position
     }
 }
 
-.chat-window {
+.center-div {
+    bottom: 0px;
+    left: 0px;
+    margin: auto;
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    top: 0px;
+}
+
+.login {
+    background-color: #000000;
+    border-radius: 10px;
+    font-weight: bold;
+    height: 200px;
+    padding: 40px;
+    width: 400px;
+    z-index: 1;
+}
+
+.start-game {
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    color: #000000;
+    height: 220px;;
+    padding: 20px 30px;
+    width: 400px;
+    z-index: 2;
+
+    button {
+        background-image: linear-gradient(to bottom, #464646, #242424);
+        border-radius: 20px;
+        box-shadow: 0px 0px 6px #333333;
+        color: #f3f3f3;
+        font-weight: bold;
+        padding: 20px;
+    }
+}
+
+.chat-section {
     background-color: rgba(0, 0, 0, 0.80);
-    border-bottom-right-radius: 0px;
     border-radius: 5px;
-    border-top-right-radius: 0px;
-    margin-bottom: 20px;
-    padding: 20px 0px 20px 20px;
+    margin: 20px 0px;
+    min-height: 240px;
+    padding: 0px;
+}
+
+.chat-window {
+    margin: 20px 0px;
 
     .message-window {
         height: 130px;
@@ -141,7 +187,6 @@ Position
 
         input {
             width: calc(~'100% - 70px');
-
         }
 
         button {
@@ -159,11 +204,7 @@ Position
 }
 
 .user-window {
-    background-color: rgba(0, 0, 0, 0.80);
-    border-bottom-left-radius: 0px;
-    border-radius: 5px;
-    border-top-left-radius: 0px;
-    height: 243px;
+    margin-bottom: 20px;
     overflow-y: auto;
     padding: 20px 0px 20px 20px;
 
@@ -182,11 +223,33 @@ Position
     }
 }
 
+.history-container {
+
+    button {
+        margin: 0px 0px 20px 0px;
+        width: 100%;
+    }
+
+    .history {
+
+        .history-list {
+            margin-bottom: 20px;
+            padding: 0px;
+
+            li {
+                list-style: none;
+            }
+        }
+
+
+
+    }
+}
+
 .footer {
     align-items: center;
     background-color: @footerBgColor;
     background-image: linear-gradient(to bottom, #222222, #000000);
-
     color: @footerFontColor;
     display: flex;
     height: 75px;

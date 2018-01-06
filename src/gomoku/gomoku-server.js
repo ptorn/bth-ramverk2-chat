@@ -76,12 +76,11 @@ async function handleMessage(message, wss, ws) {
                 broadcastAllJSON({
                     type: "message",
                     message: {
-                        message: board.winnerMsg,
+                        message: board.winnerMsg + "Great played " + board.playersGame['Player' + board.winner],
                         nick: "",
                         time: Date.now()
                     }
                 }, wss, ws);
-                roomData.player = null;
                 board.reset();
             }
             await broadcastAllJSON(roomData, wss);

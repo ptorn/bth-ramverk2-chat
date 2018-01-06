@@ -26,11 +26,13 @@ export default class GomokuSidebar extends Component {
     render() {
         return (
             <div>
-                <div className="col-md-2">
+                <div className="history-container col-md-2">
                     {this.props.game.player !== null &&
                     <div className="history">
                         <h4>Last 5 games</h4>
-                        <History history={this.props.history}/>
+                        <ul className="history-list">
+                            <History history={this.props.history}/>
+                        </ul>
                     </div>
                     }
                     {this.props.game.players.Player1 === null && this.props.game.player !== null &&

@@ -103,14 +103,20 @@ export default class Gomoku extends Component {
                     });
                 }
                 if (data.type === "gamePlay") {
+                    let player = this.state.game.player;
+
+                    if (data.game.winner !== null) {
+                        player = "spectator";
+                    }
                     this.setState((previousState) => {
                         return previousState.game = {
                             board: data.game.board,
                             size: data.game.size,
                             winner: data.game.winner,
                             currentPlayer: data.game.currentPlayer,
-                            player: previousState.game.player,
-                            players: previousState.game.players
+                            player: player,
+                            players: previousState.game.players,
+                            history: data.history
                         };
                     });
                 }
@@ -188,11 +194,18 @@ export default class Gomoku extends Component {
             <Layout>
                 <div className="mb-20">
                     <h1>BTH-Gomoku</h1>
+                    {this.state.game.player !== null &&
+                        <div>
+                            {(this.state.game.board.length === 0 || this.state.game.winner !== null) &&
+                            <div className="start-game center-div">
+                                <p><h3>To start a new game click the button and wait for an opponent!</h3></p>
+                                <button className="enter" onClick={() => { this.start(20); }} >Create game</button>
+                            </div>
+                            }
+                        </div>
+                    }
                     { this.state.game.player !== null &&
                     <div className="col-md-7 pl-0 pr-0">
-                        { this.state.game.board.length === 0 &&
-                        <button onClick={() => { this.start(20); }} >Create game</button>
-                        }
                         <GomokuBoard
                             size={this.state.game.size}
                             board={this.state.game.board}

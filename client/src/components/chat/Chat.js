@@ -60,11 +60,11 @@ export default class Chat extends Component {
         });
 
         return (
-            <div>
+            <div className="chat-section col-md-12">
                 <div className="chat-window col-md-9 rounded">
                     <div className="message-window rounded"
                         ref={(el) => { this.messagesEnd = el; }}>
-                        <ul key="userList">
+                        <ul>
                             <ChatWindow
                                 messages = {this.props.messages}
                             />
@@ -79,7 +79,7 @@ export default class Chat extends Component {
                 </div>
                 <div className="user-window col-md-3">
                     <h4>Who is here?</h4>
-                    <ul>
+                    <ul className="userlist">
                         {usersList}
                     </ul>
                 </div>
