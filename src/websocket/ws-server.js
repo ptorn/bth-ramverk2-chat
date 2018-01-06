@@ -61,7 +61,6 @@ const wsServer = (config) => {
         ws.on("close", () => (closeHandler(wss, ws)));
     });
 
-
     wss.broadcastClient = (ws, data) => {
         ws.send(data);
     };

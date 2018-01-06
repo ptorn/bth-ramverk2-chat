@@ -5,7 +5,7 @@ const board = require('../gomoku/board');
 const users = require('../gomoku/users');
 const db = require('../gomoku/database')('gomoku');
 let roomData = {};
-// db.reset("history");
+
 /**
  * Handle message
  * @param  {object} message Message object.
@@ -76,7 +76,9 @@ async function handleMessage(message, wss, ws) {
                 broadcastAllJSON({
                     type: "message",
                     message: {
-                        message: board.winnerMsg + "Great played " + board.playersGame['Player' + board.winner],
+                        message: board.winnerMsg +
+                            "Great played " +
+                            board.playersGame['Player' + board.winner],
                         nick: "",
                         time: Date.now()
                     }
@@ -115,6 +117,10 @@ async function handleMessage(message, wss, ws) {
 
 
 
+/**
+ * Initiate server with data.
+ * @return {void}
+ */
 async function initServer() {
     updateRoomData();
     roomData.history = await db.getHistory();
@@ -122,6 +128,10 @@ async function initServer() {
 
 
 
+/**
+ * Update room object with data.
+ * @return {void}
+ */
 function updateRoomData() {
     roomData.users = users.users;
     roomData.game = {
@@ -157,18 +167,20 @@ async function handleClose(wss, ws) {
     users.users = users.users.filter((nick) => {
         return nick !== ws.nick;
     });
-    broadcastExceptJSON({
-        type: "message",
-        message: {
-            message: ws.nick + " has logged out.",
-            nick: "",
-            time: Date.now()
-        }
-    }, wss, ws);
-    broadcastAllJSON({
-        type: "userList",
-        users: users.users
-    }, wss);
+    if (ws.nick !== undefined) {
+        broadcastExceptJSON({
+            type: "message",
+            message: {
+                message: ws.nick + " has logged out.",
+                nick: "",
+                time: Date.now()
+            }
+        }, wss, ws);
+        broadcastAllJSON({
+            type: "userList",
+            users: users.users
+        }, wss);
+    }
 
     // Player surrender then other will win
     if (ws.playerId !== undefined) {

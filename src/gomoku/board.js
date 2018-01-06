@@ -218,6 +218,14 @@ let board = {
         }
     },
 
+
+
+    /**
+     * Set player
+     * @param  {integer} id   Player id, 1 or 2.
+     * @param  {string} nick  Players nickname.
+     * @return {integer}      Return id of player.
+     */
     setPlayer: function(id, nick) {
         if (this.playersGame['Player' + id] === null &&
             Object.values(this.playersGame).indexOf(nick) === -1) {
@@ -229,6 +237,12 @@ let board = {
     },
 
 
+
+    /**
+     * Player surrender.
+     * @param  {string} nick Players nickname to surrender
+     * @return {boolean}     Return boolean of the result.
+     */
     playerSurrender: function(nick) {
         let surrender = this.getPlayerId(nick);
 
@@ -244,6 +258,12 @@ let board = {
         return true;
     },
 
+
+
+    /**
+     * Get game result object
+     * @return {object} Object with game result data.
+     */
     getGameResult: function() {
         let statusOne = "winner";
         let statusTwo = "looser";
@@ -268,6 +288,11 @@ let board = {
 
 
 
+    /**
+     * Get player id if nick is a player.
+     * @param  {string} nick String to test for nickname.
+     * @return {integer}     Return id if nickname is a player.
+     */
     getPlayerId: function(nick) {
         let user = Object.values(this.playersGame).indexOf(nick);
 
