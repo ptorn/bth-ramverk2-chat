@@ -13,7 +13,7 @@ services:
         #     - /home/node/app/node_modules
         #     - /home/node/app/client/node_modules
         ports:
-            - "3000:3000"
+            - "4000:4000"
         links:
             - mongodb
         command: "npm start"
@@ -25,5 +25,5 @@ services:
         volumes:
             - ./data/db:/data/db
         ports:
-            - 27018:27018
+            - 27018:27017
         command: mongod
