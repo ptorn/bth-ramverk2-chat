@@ -3,7 +3,7 @@
 let board = {
     size: 0,
     board: [],
-    player: 0,
+    player: null,
     winner: null,
     winnerMsg: null,
     playersGame: {
@@ -186,6 +186,7 @@ let board = {
                     return row;
                 }
                 row = checkSquare(step + 1, row);
+                return undefined;
             };
 
             checkSquare(step, row);
@@ -231,32 +232,23 @@ let board = {
     playerSurrender: function(nick) {
         let surrender = this.getPlayerId(nick);
 
-        if (surrender === false) {
+        if (this.playersGame.Player2 === null ||
+            this.playersGame.Player1 === null ||
+            surrender === false) {
             return false;
         }
         if (surrender === 0) {
-            if (this.playersGame.Player2 === null) {
-                return false;
-            }
             this.winner = 2;
-            return true;
-        } else {
-            if (this.playersGame.Player1 === null) {
-                return false;
-            }
-            this.winner = 1;
-            return true;
         }
+        this.winner = 1;
+        return true;
     },
 
     getGameResult: function() {
-        let statusOne = "";
-        let statusTwo = "";
+        let statusOne = "winner";
+        let statusTwo = "looser";
 
-        if (this.winner === 1) {
-            statusOne = "winner";
-            statusTwo = "looser";
-        } else {
+        if (this.winner === 2) {
             statusOne = "looser";
             statusTwo = "winner";
         }

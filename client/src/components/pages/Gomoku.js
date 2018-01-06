@@ -182,7 +182,7 @@ export default class Gomoku extends Component {
     }
 
     render() {
-        let callback = this.state.game.winner == null ? this.placeToken : () => null;
+        let callback = this.state.game.winner === null ? this.placeToken : () => null;
 
         return (
             <Layout>

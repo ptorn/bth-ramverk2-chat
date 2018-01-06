@@ -94,6 +94,7 @@ const wsServer = (config) => {
             ws.ping('', false, true);
         });
     }, 10000);
+    return this;
 };
 
 module.exports = wsServer;

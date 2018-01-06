@@ -68,7 +68,7 @@ async function handleMessage(message, wss, ws) {
                 board.placeMarker(data.position.x, data.position.y);
             }
             roomData.type = "gamePlay";
-            broadcastAllJSON(roomData, wss);
+            updateRoomData();
             if (board.winner !== null) {
                 // Update history with new winner
                 await db.addGameData('history', board.getGameResult());
@@ -81,7 +81,10 @@ async function handleMessage(message, wss, ws) {
                         time: Date.now()
                     }
                 }, wss, ws);
+                roomData.player = null;
+                board.reset();
             }
+            await broadcastAllJSON(roomData, wss);
             break;
         case "setPlayer":
             var status = 1;
