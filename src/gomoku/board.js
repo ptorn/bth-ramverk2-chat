@@ -57,6 +57,10 @@ let board = {
         this.player = 0;
         this.winner = null;
         this.winnerMsg = null;
+        this.playersGame = {
+            Player1: null,
+            Player2: null
+        };
     },
 
 
@@ -224,6 +228,30 @@ let board = {
     },
 
 
+    playerSurrender: function(nick) {
+        let surrender = this.getPlayerId(nick);
+
+        console.log(surrender);
+
+        if (surrender === false) {
+            return false;
+        }
+        if (surrender === 0) {
+            if (this.playersGame.Player2 === null) {
+                return false;
+            }
+            console.log(this.playersGame.Player2);
+
+            this.winner = 2;
+            return true;
+        } else {
+            if (this.playersGame.Player1 === null) {
+                return false;
+            }
+            this.winner = 1;
+            return true;
+        }
+    },
 
     getGameResult: function() {
         let statusOne = "";
@@ -252,24 +280,14 @@ let board = {
 
 
 
-    removePlayer: function (nick) {
+    getPlayerId: function(nick) {
         let user = Object.values(this.playersGame).indexOf(nick);
 
         if (user !== -1) {
-            console.log(this.playersGame);
-
-            this.playersGame['Player' + (user + 1)] = null;
-            console.log(this.playersGame);
+            return user;
         }
-        console.log(Object.values(this.playersGame).indexOf(nick));
-
-        // if (Object.values(this.playersGame).indexOf(nick) === -1) {
-        //     this.playersGame['Player' + id] = nick;
-        //     return id;
-        // } else {
-        //     throw new Error("Could not set player.");
-        // }
-    }
+        return false;
+    },
 };
 
 module.exports = board;

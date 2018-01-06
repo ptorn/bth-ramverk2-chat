@@ -3,7 +3,7 @@
 const WebSocket = require("ws");
 
 /**
- * WebSocket Sercver
+ * WebSocket Server
  * @param  {object} config Config object
  * @return {object}        Server object
  */

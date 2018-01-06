@@ -1,0 +1,28 @@
+version: '3'
+services:
+    express:
+        image: ptorn/bth-ramverk2-gomoku:latest
+
+        environment:
+            - DBWEBB_DSN=mongodb://mongodb:27017/ramverk2
+        user: "node"
+        working_dir: /home/node/app
+        # volumes:
+        #     - ./:/home/node/app
+        #     - /home/node/app/node_modules
+        #     - /home/node/app/client/node_modules
+        ports:
+            - "3000:3000"
+        links:
+            - mongodb
+        command: "npm start"
+
+    mongodb:
+        image: mongo
+        environment:
+            - MONGO_DATA_DIR=/data/db
+        volumes:
+            - ./data/db:/data/db
+        ports:
+            - 27017:27017
+        command: mongod

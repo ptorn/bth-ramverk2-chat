@@ -146,7 +146,6 @@ describe('Test Gomoku Board.', function () {
             board.board.push(1, 2, 1, 2, 1, 2, 1, 2, 1, 2);
             board.board.push(2, 1, 2, 1, 2, 1, 2, 1, 2, 1);
             board.board.push(1, 2, 1, 2, 1, 2, 1, 2, 1, 2);
-            console.log;
 
             expect(board.checkWinner(9, 9)).to.be.true;
             expect(board.winnerMsg).to.equal('No winner!');
@@ -184,7 +183,6 @@ describe('Test Gomoku Board.', function () {
         });
         it('Get game result. Player1 won.', () => {
             board.board = [];
-            console.log(board.board);
             board.board.push(1, 2, 1, 2, 1, 2, 1, 2, 1, 2);
             board.board.push(2, 1, 2, 1, 2, 1, 2, 1, 2, 1);
             board.board.push(2, 1, 2, 1, 2, 1, 2, 1, 2, 1);
@@ -225,9 +223,22 @@ describe('Test Gomoku Board.', function () {
             board.playersGame.Player2 = "James";
             board.playersGame.Player1 = "Joe";
         });
-        it('Check winner, when 5 in a row Y-line', () => {
-            board.removePlayer("James");
-            expect(board.playersGame.Player2).to.equal(null);
+        it('PlayerSurrender that is not a player.', () => {
+            expect(board.playerSurrender("Jane")).to.be.false;
+        });
+        it('PlayerSurrender player1.', () => {
+            expect(board.playerSurrender("Joe")).to.be.true;
+        });
+        it('PlayerSurrender player1 but player2 is null', () => {
+            board.playersGame.Player2 = null;
+            expect(board.playerSurrender("Joe")).to.be.false;
+        });
+        it('PlayerSurrender player2 but player1 is null', () => {
+            board.playersGame.Player1 = null;
+            expect(board.playerSurrender("James")).to.be.false;
+        });
+        it('PlayerSurrender player2.', () => {
+            expect(board.playerSurrender("James")).to.be.true;
         });
     });
 });

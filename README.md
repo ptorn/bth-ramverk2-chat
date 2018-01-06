@@ -9,6 +9,15 @@ BTH-Ramverk2-Gomoku
 
 This is my game application for the course Framework2 (Ramverk2) at BTH.
 
+## Specifikation
+The specifikation for this application is to build a Gomoku game with a live chat that uses websockets for the live features of the game such as the gameplay and the chat.
+Using Express.js, React, MongoDB, LESS and websockets as the main base for the application. With the use of MongoDB I will store the last games played to display inside the game. The history of the played games will display who wonn and who lost.
+
+Express.js will be used for backend and serving the application to the internet. WebSockets is used for communicating the live data to all the clients connected to the game. Every client will recieve updates from the Express server after they have logged in with a nickname. 
+For the client I chose to use React. React feels like a perfekt match to handle the state changes of the game in a efficent matter without reloading the entire DOM everytime. React keeps track on state changes and upon changes it will re-render the view. This works perfektly for a application like this that uses live features of the game and the chat to keep the views up-to-date with latest data from the server.
+
+For the gameplay two users will claim a seat at the table to be able to play. Other users in the room will be able to send chat messages and watch the game as the two players battle it out on the board.
+
 ## Installation
 
 1. First clone the repo.

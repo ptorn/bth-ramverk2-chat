@@ -15,13 +15,13 @@ const ChatLine = (props) => {
 
 
 const ChatWindow = (props) => {
-    let messagesHtml =  props.messages.map((message, id) => {
+    let messagesHtml = props.messages.map((message, id) => {
         return (
             <ChatLine
                 key={id}
-                nick = {message.nick}
-                message = {message.message}
-                time = {message.time}
+                nick={message.nick}
+                message={message.message}
+                time={message.time}
             />
         );
     });
@@ -30,6 +30,7 @@ const ChatWindow = (props) => {
         <div>
             {messagesHtml}
         </div>
+
     );
 };
 
@@ -45,15 +46,14 @@ export default class Chat extends Component {
     scrollToBottom() {
         const node = ReactDOM.findDOMNode(this.messagesEnd);
 
-        node.scrollIntoView({ behavior: "smooth" });
+        node.scrollTop = node.scrollHeight;
     }
-    // componentDidMount() {
-    //     this.scrollToBottom();
-    // }
-
-    // componentDidUpdate() {
-    //     this.scrollToBottom();
-    // }
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
     render() {
         let usersList = this.props.users.map((item, id) => {
             return <UserName key={id} item={item} number={id} />;
@@ -62,15 +62,13 @@ export default class Chat extends Component {
         return (
             <div>
                 <div className="chat-window col-md-9 rounded">
-                    <div className="message-window rounded">
+                    <div className="message-window rounded"
+                        ref={(el) => { this.messagesEnd = el; }}>
                         <ul key="userList">
                             <ChatWindow
                                 messages = {this.props.messages}
                             />
                         </ul>
-                        <div style={{ float: "left", clear: "both" }}
-                            ref={(el) => { this.messagesEnd = el; }}>
-                        </div>
                     </div>
                     <hr />
                     <ChatInput

@@ -5,8 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var gomoku = require('./routes/gomoku');
-
 var app = express();
 
 // uncomment after placing your favicon in /public
@@ -19,10 +17,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Serve static files from the React app
 // app.use(express.static(path.join(__dirname, "client/build")));
-
-// Gomoku
-
-app.use('/api/gomoku', gomoku);
 
 // Default root
 app.use('/', (req, res) => {

@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import Layout from '../Layout';
 import GomokuBoard from '../gomoku/GomokuBoard';
 import GomokuSidebar from '../gomoku/GomokuSidebar';
-
 import Chat from "../chat/ChatLogin";
-
 import Config from "../../config";
 
 export default class Gomoku extends Component {
@@ -15,7 +13,6 @@ export default class Gomoku extends Component {
         this.setPlayer = this.setPlayer.bind(this);
 
         this.sendMessage = this.sendMessage.bind(this);
-        console.log(Config.wsServer);
         this.state = {
             ws: new WebSocket("ws://" + Config.wsServer, "json"),
             nick: "",
@@ -50,19 +47,27 @@ export default class Gomoku extends Component {
                     });
                 }
                 if (data.type === "userList") {
-                    console.log(data);
-
                     this.setState((previousState) => {
                         previousState.chat.users = data.users;
                         return previousState;
                     });
                 }
                 if (data.type === "enterRoom") {
-                    console.log(data);
-
                     this.setState((previousState) => {
                         previousState.chat.users = data.users;
                         previousState.chat.messages.push(data.message);
+                        previousState.game.board = data.game.board;
+                        previousState.game.size = data.game.size;
+                        previousState.game.winner = data.game.winner;
+                        previousState.game.player = "spectator";
+                        previousState.game.players = data.game.players;
+                        previousState.history = data.history;
+                        return previousState;
+                    });
+                }
+                if (data.type === "updateRoom") {
+                    this.setState((previousState) => {
+                        previousState.chat.users = data.users;
                         previousState.game.board = data.game.board;
                         previousState.game.size = data.game.size;
                         previousState.game.winner = data.game.winner;
@@ -145,11 +150,6 @@ export default class Gomoku extends Component {
             nick: this.state.nick,
             message: content
         }));
-        this.logMessage();
-    }
-
-    logMessage() {
-        console.log(this.state);
     }
 
     placeToken(id) {

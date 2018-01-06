@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 const History = (props) => {
-    return props.history.map((record, id) => {
+    let lastFive = props.history.slice(Math.max(props.history.length - 5));
+
+    return lastFive.map((record, id) => {
         let playerOne;
         let playerTwo;
 
