@@ -1,28 +1,33 @@
 version: '3'
 services:
     gomoku_express:
+        build:
+            context: .
+            # dockerfile: docker/Dockerfile_prod
+            dockerfile: docker/Dockerfile_node_latest
+
         image: ptorn/bth-ramverk2-gomoku:latest
 
         environment:
-            - DBWEBB_DSN=mongodb://gomoku_mongodb:27018/gomoku
+            - DBWEBB_DSN=mongodb://mongodb:27017/gomoku
         user: "node"
         working_dir: /home/node/app
-#        volumes:
-#            - ./:/home/node/app
-#            - /home/node/app/node_modules
-#            - /home/node/app/client/node_modules
+        volumes:
+            - ./:/home/node/app
+            - /home/node/app/node_modules
+            - /home/node/app/client/node_modules
         ports:
             - "4000:3000"
         links:
-            - gomoku_mongodb
+            - mongodb
         command: "npm start"
 
-    gomoku_mongodb:
-        image: mongo
+    mongodb:
+        image: mongo:latest
         environment:
             - MONGO_DATA_DIR=/data/db
         volumes:
             - ./data/db:/data/db
         ports:
-            - 27017:27017
-        command: mongod --bind_ip_all
+            - 27018:27017
+        command: mongod
