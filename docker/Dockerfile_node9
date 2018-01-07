@@ -11,6 +11,5 @@ RUN chown -R node:node /home/node/app
 
 USER node
 RUN npm install
-RUN npm run install-client && npm run build-client
 
 EXPOSE 3000
