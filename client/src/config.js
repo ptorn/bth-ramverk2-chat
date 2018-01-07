@@ -1,6 +1,7 @@
+let dbwebb = process.env.DBWEBB_PORT !== undefined ? "localhost:" + process.env.DBWEBB_PORT : false;
 const Config = {
     wsServer: process.env.DBWEBB_WSSERVER ||
-        // "localhost:" + process.env.DBWEBB_PORT ||
+        dbwebb ||
         "localhost:3001"
 };
 
