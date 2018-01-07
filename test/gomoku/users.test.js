@@ -3,11 +3,20 @@
 const mocha = require('mocha');
 const describe = mocha.describe;
 const chai = require('chai');
+const before = mocha.before;
+const after = mocha.after;
 const expect = chai.expect;
 const it = mocha.it;
 const users = require("../../src/gomoku/users");
 
 describe("Test Gomoku User module", () => {
+    before(() => {
+        users.users = [];
+    });
+    after(() => {
+        users.users = [];
+    });
+
     it("Test so empty first.", () => {
         expect(users.users.length).to.equal(0);
     });

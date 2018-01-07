@@ -196,10 +196,20 @@ export default class Gomoku extends Component {
                     <h1>BTH-Gomoku</h1>
                     {this.state.game.player !== null &&
                         <div>
-                            {(this.state.game.board.length === 0 || this.state.game.winner !== null) &&
+                            {(this.state.game.board.length === 0 ||
+                                this.state.game.winner !== null) &&
                             <div className="start-game center-div">
-                                <p><h3>To start a new game click the button and wait for an opponent!</h3></p>
-                                <button className="enter" onClick={() => { this.start(20); }} >Create game</button>
+                                <p>
+                                    <h3>
+                                        To start a new game click the button
+                                        and wait for an opponent!
+                                    </h3>
+                                </p>
+                                <button
+                                    className="enter"
+                                    onClick={() => { this.start(20); }} >
+                                    Create game
+                                </button>
                             </div>
                             }
                         </div>

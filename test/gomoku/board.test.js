@@ -1,9 +1,7 @@
 const mocha = require('mocha');
 const chai = require('chai');
 const describe = mocha.describe;
-const before = mocha.before;
 const beforeEach = mocha.beforeEach;
-
 const it = mocha.it;
 const board = require('../../src/gomoku/board');
 const expect = chai.expect;
