@@ -7,7 +7,7 @@
 BTH-Ramverk2-Gomoku
 =====================
 
-This application is a final project for the course Framework2 at [BTH](https://www.bth.se/eng/).
+This application is my final project for the course Framework2 at [BTH](https://www.bth.se/eng/).
 
 ## Specification
 This is my version of the game [Gomoku](https://en.wikipedia.org/wiki/Gomoku). The goal of the game is to get five tokens in a row. Gomoku is played by two players. Each player has their own token. Player one has "X" and player two has "0". Player one start by placing the token on the board. After that the players take turns placing theire tokens on the board. Upon entry of the webpage the user will have to login by choosing a nickname to represent that user. The nickname must be uniqe and can not be blank. Many users can login and enter the room at the same time. Once inside all the logged in users can talk to eachother in realtime using the chat client on the page. To be able to play a user must claim a seat at the table. If a player leaves the table in the middle of a game then the opponent will winn that round and the data will be stored in the database. Inside the room you can see the result of the last five rounds where the winner and looser is displayed. The project is built using JavaScript, HTML, LESS. The result of games played are stored in a MongoDB database and the data is picked up from the database and displayed inside the application.
