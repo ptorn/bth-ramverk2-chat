@@ -15,14 +15,14 @@
     "test": "nyc --reporter=html --reporter=text mocha 'test/**/*.js' --exit",
     "test-watch": "nyc --reporter=html --reporter=text mocha 'test/**/*.js' --watch",
     "test-scrutinizer": "nyc --all --reporter=clover mocha 'test/**/*.js' --exit",
-    "validate": "npm run eslint && npm run stylelint && cd client && npm run validate-less",
+    "mocha-nyc": "nyc --reporter=html --reporter=text mocha 'test/**/*.js' --exit",
     "report-codecov": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "start-docker": "docker-compose up -d",
     "stop-docker": "docker-compose down",
     "start-docker-prod": "docker-compose -f docker-compose-prod.yml up -d",
-    "test1": "docker-compose -f docker-compose-test.yml run ramverk2_latest_test",
-    "test2": "docker-compose -f docker-compose-test.yml run ramverk2_node9_test",
-    "test3": "docker-compose -f docker-compose-test.yml run ramverk2_node8_test"
+    "test-docker": "docker-compose -f docker-compose-test.yml run ramverk2_latest_test",
+    "test-docker1": "docker-compose -f docker-compose-test.yml run ramverk2_node9_test",
+    "test-docker2": "docker-compose -f docker-compose-test.yml run ramverk2_node8_test"
   },
   "dependencies": {
     "body-parser": "~1.18.2",

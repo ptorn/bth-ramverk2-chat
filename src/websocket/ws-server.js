@@ -48,6 +48,7 @@ const wsServer = (config) => {
         config.handleClose(wss, ws);
     };
 
+    wss.on('error', () => console.log('errored'));
     wss.on("connection", (ws /*, req*/) => {
         const heartbeat = () => {
             ws.isAlive = true;

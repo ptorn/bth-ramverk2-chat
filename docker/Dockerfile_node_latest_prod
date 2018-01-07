@@ -1,4 +1,4 @@
-FROM node:6-alpine
+FROM node:alpine
 
 USER node
 RUN mkdir -p /home/node/app
@@ -10,6 +10,7 @@ COPY . .
 RUN chown -R node:node /home/node/app
 
 USER node
+ENV DBWEBB_WSSERVER=ptorn.se:4000
 RUN npm install
 
 EXPOSE 3000

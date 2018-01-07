@@ -34,7 +34,7 @@ async function handleMessage(message, wss, ws) {
             };
             roomData.type = "enterRoom";
             broadcastClientJSON(roomData, wss, ws);
-            await broadcastExceptJSON({
+            broadcastExceptJSON({
                 type: "message",
                 message: {
                     message: data.user.nick + " has logged in.",
@@ -77,7 +77,7 @@ async function handleMessage(message, wss, ws) {
                     type: "message",
                     message: {
                         message: board.winnerMsg +
-                            "Great played " +
+                            " Great played " +
                             board.playersGame['Player' + board.winner],
                         nick: "",
                         time: Date.now()
@@ -85,7 +85,7 @@ async function handleMessage(message, wss, ws) {
                 }, wss, ws);
                 board.reset();
             }
-            await broadcastAllJSON(roomData, wss);
+            broadcastAllJSON(roomData, wss);
             break;
         case "setPlayer":
             var status = 1;
@@ -187,7 +187,7 @@ async function handleClose(wss, ws) {
         if (board.playerSurrender(ws.nick)) {
             await db.addGameData('history', board.getGameResult());
             roomData.history = await db.getHistory();
-            await broadcastExceptJSON({
+            broadcastExceptJSON({
                 type: "message",
                 message: {
                     message: "Player" + ws.playerId + " - " + ws.nick + " lost.",
@@ -201,7 +201,7 @@ async function handleClose(wss, ws) {
         wss.clients.forEach((ws) => { delete ws.playerId; });
     }
     roomData.type = "updateRoom";
-    await broadcastExceptJSON(roomData, wss);
+    broadcastExceptJSON(roomData, wss);
 }
 
 
@@ -213,8 +213,8 @@ async function handleClose(wss, ws) {
  * @param  {object} ws   WebSocket connection object.
  * @return {void}
  */
-async function broadcastClientJSON(data, wss, ws) {
-    wss.broadcastClient(ws, JSON.stringify(await data));
+function broadcastClientJSON(data, wss, ws) {
+    wss.broadcastClient(ws, JSON.stringify(data));
 }
 
 

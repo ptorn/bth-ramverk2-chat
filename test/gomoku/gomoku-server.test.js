@@ -2,10 +2,11 @@ const mocha = require('mocha');
 const chai = require('chai');
 const describe = mocha.describe;
 // const beforeEach = mocha.beforeEach;
+// const afterEach = mocha.afterEach;
+
 const before = mocha.before;
 const after = mocha.after;
 
-// const afterEach = mocha.afterEach;
 const WebSocket = require("ws");
 const it = mocha.it;
 const expect = chai.expect;
@@ -15,9 +16,9 @@ const server = http.createServer(app);
 const gomokuServer = require('../../src/gomoku/gomoku-server');
 
 describe('Test Web Socket.', function () {
-    before((done) => {
+    before(() => {
+        server.listen(3000);
         gomokuServer(server);
-        server.listen(3000, done);
     });
     after((done) => {
         server.close();
@@ -57,14 +58,12 @@ describe('Test Web Socket.', function () {
                     nick: "Hej",
                     message: "Test"
                 }));
-                // done();
             };
             ws.onmessage = (evt) => {
                 let data = JSON.parse(evt.data);
 
                 expect(data.type).to.equal("message");
                 expect(data.message).to.equal("Tes");
-                // done();
             };
             done();
         });
