@@ -46,7 +46,7 @@ The backend is built on the Express.js framework that holds the game logic and a
 
 To manage the realtime features and functionality I use WebSockets. WebSockets establishes a link between the server and the clients. Using WebSockets the server/client can send messages to and from each other to update everyone on the latest changes.
 
-#### Docker
+#### Docker containers
 
 [Docker](https://www.docker.com/) is used for containerizing the application. You could very fast setup the application for production or a testing environment with docker to ensure all dependencies are the same regarding of the system beeing used to run the application.
 
@@ -82,7 +82,13 @@ or the port express uses to server the application.
 DBWEBB_PORT=3000
 ```
 
-The values used here in the example is the default values.
+This is the adress to the WebSocket server that the client use.
+
+```bash
+DBWEBB_WSSERVER=loalhost:3000
+```
+
+The values used in these examples are the default values.
 
 ## Installation method 1
 
@@ -241,12 +247,17 @@ Npm as a package-manager works great. Not the fastest but it does the job really
 
 # Docker
 
-As a last step in my CI-Chain I added docker cloud. Once a commit has been validated and passed building then docker starts to build the image. By doing this I delegate the building time to a sepperate service that automaticly builds any new release.
+As a last step in my CI-Chain I added docker cloud. Once a commit has been validated and passed the building inspection then docker starts to build the image. By doing this I delegate the building time to a sepperate service that automaticly builds any new release.
 
 I use this image to run my application on my productionserver. This happend to be a great way for me to launch my application. I had some problems prior with a service provider that cancelled my npm install script due to that it took to long to run. By just pulling down the latest image I get a fully functional container running the latest version of the application.
 
 [bth-ramver2-gomoku](https://www.npmjs.com/package/bth-mongodb-crud) on docker store.
 [Dockerfile](https://github.com/ptorn/bth-ramverk2-gomoku/blob/master/docker/Dockerfile_node_latest) on GitHub.
 
+To download the latest image from docker use this command with docker.
+
+```bash
+docker pull ptorn/bth-ramverk2-gomoku
+```
 
 **Enjoy!**

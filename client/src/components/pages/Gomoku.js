@@ -11,7 +11,8 @@ export default class Gomoku extends Component {
         this.connect = this.connect.bind(this);
         this.placeToken = this.placeToken.bind(this);
         this.setPlayer = this.setPlayer.bind(this);
-
+        console.log(Config.wsServer);
+        
         this.sendMessage = this.sendMessage.bind(this);
         this.state = {
             ws: new WebSocket("ws://" + Config.wsServer, "json"),
@@ -199,12 +200,12 @@ export default class Gomoku extends Component {
                             {(this.state.game.board.length === 0 ||
                                 this.state.game.winner !== null) &&
                             <div className="start-game center-div">
-                                <p>
+                                <div>
                                     <h3>
                                         To start a new game click the button
                                         and wait for an opponent!
                                     </h3>
-                                </p>
+                                </div>
                                 <button
                                     className="enter"
                                     onClick={() => { this.start(20); }} >
