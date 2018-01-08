@@ -101,15 +101,15 @@ async function handleMessage(message, wss, ws) {
                 player: data.playerId,
                 status: status
             }, wss, ws);
-            broadcastAllJSON({
-                type: "updatePlayers",
-                message: {
-                    nick: "",
-                    time: Date.now(),
-                    message: ws.nick + " has entered the game as Player " + data.playerId
-                },
-                players: board.playersGame
-            }, wss);
+
+            updateRoomData();
+            roomData.type = "updatePlayers";
+            roomData.message = {
+                nick: "",
+                time: Date.now(),
+                message: ws.nick + " has entered the game as Player " + data.playerId
+            };
+            broadcastAllJSON(roomData, wss);
             break;
         default:
     }

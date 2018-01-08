@@ -18,11 +18,21 @@ let board = {
      * @return {void}
      */
     init: function(squares) {
+        board = {
+            size: 0,
+            board: [],
+            player: null,
+            winner: null,
+            winnerMsg: null,
+            playersGame: {
+                Player1: null,
+                Player2: null
+            },
+        };
         if (squares < 10 || squares > 99) {
             throw new Error('Unsupported size.');
         }
         this.size = squares;
-        this.winner = null;
         this.generateBoard();
     },
 

@@ -35,10 +35,6 @@ describe('Test Gomoku Board.', function () {
         });
     });
     describe('Board methods.', () => {
-        // before(() => {
-        //     board.init(10);
-        //     board.start();
-        // });
         beforeEach(() => {
             board.reset();
             board.init(10);
@@ -54,7 +50,7 @@ describe('Test Gomoku Board.', function () {
             expect(() => { board.getPosition(1, 11); }).to.throw();
         });
         it('Place a marker.', () => {
-            expect(board.placeMarker(5, 5)).to.be.true;
+            expect(board.placeMarker(5, 5)).to.equal(true);
             expect(board.board[55]).to.equal(1);
             expect(() => { board.placeMarker(11, 11); }).to.throw();
         });

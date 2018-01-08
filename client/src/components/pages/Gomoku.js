@@ -58,6 +58,7 @@ export default class Gomoku extends Component {
                         previousState.chat.messages.push(data.message);
                         previousState.game.board = data.game.board;
                         previousState.game.size = data.game.size;
+                        previousState.game.currentPlayer = data.game.currentPlayer;
                         previousState.game.winner = data.game.winner;
                         previousState.game.player = "spectator";
                         previousState.game.players = data.game.players;
@@ -71,6 +72,7 @@ export default class Gomoku extends Component {
                         previousState.game.board = data.game.board;
                         previousState.game.size = data.game.size;
                         previousState.game.winner = data.game.winner;
+                        previousState.game.currentPlayer = data.game.currentPlayer;
                         previousState.game.player = "spectator";
                         previousState.game.players = data.game.players;
                         previousState.history = data.history;
@@ -96,9 +98,9 @@ export default class Gomoku extends Component {
                 }
                 if (data.type === "updatePlayers") {
                     this.setState((previousState) => {
-                        previousState.game.players = data.players;
+                        previousState.game.players = data.game.players;
+                        previousState.game.currentPlayer = data.game.currentPlayer;
                         previousState.chat.messages.push(data.message);
-
                         return previousState;
                     });
                 }
@@ -227,6 +229,7 @@ export default class Gomoku extends Component {
                         setPlayer={this.setPlayer}
                         game={this.state.game}
                         history={this.state.history}
+                        currentPlayer={this.state.game.currentPlayer}
                     />
                     <Chat
                         connect={this.connect}
