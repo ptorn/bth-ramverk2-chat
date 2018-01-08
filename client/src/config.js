@@ -1,8 +1,9 @@
-let dbwebb = process.env.DBWEBB_PORT !== undefined ? "localhost:" + process.env.DBWEBB_PORT : false;
+const port = process.env.DBWEBB_PORT !== undefined ?
+    process.env.DBWEBB_PORT :
+    "3000";
+const server = "localhost";
 const Config = {
-    wsServer: process.env.DBWEBB_WSSERVER ||
-        dbwebb ||
-        "localhost:3001"
+    wsServer: server + ":" + port
 };
 
 module.exports = Config;

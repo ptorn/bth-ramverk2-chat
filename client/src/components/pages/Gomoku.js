@@ -11,8 +11,7 @@ export default class Gomoku extends Component {
         this.connect = this.connect.bind(this);
         this.placeToken = this.placeToken.bind(this);
         this.setPlayer = this.setPlayer.bind(this);
-        console.log(Config.wsServer);
-        
+        console.log(Config);
         this.sendMessage = this.sendMessage.bind(this);
         this.state = {
             ws: new WebSocket("ws://" + Config.wsServer, "json"),
