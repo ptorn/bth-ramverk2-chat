@@ -11,7 +11,6 @@ export default class Gomoku extends Component {
         this.connect = this.connect.bind(this);
         this.placeToken = this.placeToken.bind(this);
         this.setPlayer = this.setPlayer.bind(this);
-        console.log(Config);
         this.sendMessage = this.sendMessage.bind(this);
         this.state = {
             ws: new WebSocket("ws://" + Config.wsServer, "json"),
@@ -191,6 +190,7 @@ export default class Gomoku extends Component {
 
     render() {
         let callback = this.state.game.winner === null ? this.placeToken : () => null;
+        let setPlayer = this.state.game.player === "spectator" ? this.setPlayer : () => null;
 
         return (
             <Layout>
@@ -226,7 +226,7 @@ export default class Gomoku extends Component {
                     </div>
                     }
                     <GomokuSidebar
-                        setPlayer={this.setPlayer}
+                        setPlayer={setPlayer}
                         game={this.state.game}
                         history={this.state.history}
                         currentPlayer={this.state.game.currentPlayer}

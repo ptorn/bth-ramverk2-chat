@@ -9,10 +9,29 @@ BTH-Ramverk2-Gomoku
 
 This application is my final project for the course Framework2 at [BTH](https://www.bth.se/eng/).
 
+Demo can be viewed [here](http://gomoku.ptorn.se)
+
+## Content
+
 1. [Specification](#specification)
+    - [React - Client](#react-client)
+    - [Express - Backend](#express-backend)
+    - [MongoDB](#mongodb)
+    - [WebSockets](#websockets)
+    - [Docker - Containers](#docker-containers)
+    - [Mocha](#mocha)
+    - [Limitations](#limitations)
+    - [Summary](#summary)
 2. [Installation](#installation)
+    - [Installation method 1](#installation-method-1)
+    - [Installation method 2 using Docker](#installation-method-2-using-docker)
+    - [Installation for production (Docker)](#installation-for-production-docker)
 3. [Testing](#testing)
+    - [Testing and validation](#testing-and-validation)
+    - [Testing using Docker](#testing-using-docker)
+    - [Code coverage](#code-coverage)
 4. [CI-Chain](#ci-chain)
+    - [Code coverage](#code-coverage)
 5. [Realtime](#realtime)
 6. [Database](#database)
 7. [Npm-module](#npm-module)
@@ -20,7 +39,7 @@ This application is my final project for the course Framework2 at [BTH](https://
 8. [Article about React](#article-about-react)
 
 
-## Specification
+# Specification
 
 This is my version of the game [Gomoku](https://en.wikipedia.org/wiki/Gomoku). The goal of the game is to get five tokens in a row. Gomoku is played by two players. Each player has their own token. Player one has "X" and player two has "0". Player one start by placing the token on the board. After that the players take turns placing their tokens on the board. Upon entry of the web page the user will have to login by choosing a nickname to represent that user. The nickname must be unique and can not be blank. Many users can login and enter the room at the same time. Once inside all the logged in users can talk to each other in real-time using the chat client on the page. To be able to play a user must claim a seat at the table. If a player leaves the table in the middle of a game then the opponent will win that round and the data will be stored in the database. Inside the room you can see the result of the last five rounds where the winner and looser is displayed. The project is built using JavaScript, HTML, LESS. The result of games played are stored in a MongoDB database and the data is picked up from the database and displayed inside the application.
 
@@ -32,31 +51,31 @@ This is my version of the game [Gomoku](https://en.wikipedia.org/wiki/Gomoku). T
 * Realtime feature
 * Mocha - Unit testing
 
-#### React - Client
+## React - Client
 
 [React](https://reactjs.org/) is a JavaScript framework that I used for managing the views of my client using JSX. JSX is a syntax extension to JavaScript which we use to write the views. React uses something called components which lets us re-use the code over and over. A component can have its own state or just inherit properties from the parent component that has a state. By using a components state React can keep track on what data is being updated and then only re render that specific DOM-object instead of reloading the entire page. Components that inherit their properties from the parent component with a state will be re-rendered by update of data. This makes React a great choice for working on a SPA (single-page-application). That is perfect for this application since this is a game that is using web-sockets to transfer data real-time and a lot of the data on the page remains the same. So when React notice that the data has changed in the state of the component it re-renders the component. A example would be placing a token on the table. Instead of reloading the entire page and make unnecessary calls to the server it just receives data from the web-socket and update the components state. The rest is React magic.
 
-#### Express - Backend
+## Express - Backend
 
 The back-end is built on the Express.js framework that holds the game logic and also works as a web server by serving the client. [Express.js](https://expressjs.com/) is a framework for [Node.js](https://nodejs.org/en/) that is written in JavaScript. That makes it a great choice for this project. Express.js handles all the game logic, serves the client as a web-server and also a WebSocket-server. With Express and Node.js we now use JavaScript both on the client and the server which is very convenient.
 
-#### MongoDB
+## MongoDB
 
 [MongoDB](https://www.mongodb.com/) is a NoSQL database that is used to store the result of previous played games. The client will display the last five played games once you enter the room. MongoDB is a none relational database and works very well when we are dealing with objects that we want to store as is in a database. The data is stored in JSON alike files and makes it very convenient when programming in JavaScript that we deal with objects.
 
-#### WebSockets
+## WebSockets
 
 To manage the real-time features and functionality I use WebSockets. WebSockets establishes a link between the server and the clients. Using WebSockets the server/client can send messages to and from each other to update everyone on the latest changes.
 
-#### Docker containers
+## Docker - Containers
 
 [Docker](https://www.docker.com/) is used for containerizing the application. You could very fast setup the application for production or a testing environment with docker to ensure all dependencies are the same regarding of the system being used to run the application.
 
-#### Mocha
+## Mocha
 
 To make sure that the application is doing what it is supposed to I use [Mocha](https://mochajs.org/) for unit-testing. I added [Chai](http://chaijs.com/) as a assertion library and use expect assert my tests.
 
-### Limitations
+## Limitations
 
 There are some limitations in the application.
 
@@ -64,7 +83,7 @@ There are some limitations in the application.
 
 * Only one game can be played at a time which limits the game to two people playing at a time.
 
-### Summary
+## Summary
 
 I think that the techniques that I have used for this application works extremely well. React does the job of handling the views of the client very well and is a joy to work with. Very nice to work with the components state and real-time features using WebSockets.
 Makes the app as SPA (single-page-application) work very fast and not re-render the whole DOM.
@@ -94,13 +113,13 @@ The values used in these examples are the default values.
 
 ## Installation method 1
 
-#### First clone the repo
+### First clone the repo
 
 ```bash
 git clone https://github.com/ptorn/bth-ramverk2-gomoku.git
 ```
 
-#### Install dependencies
+### Install dependencies
 
 This will download all dependencies and build the client.
 
@@ -109,7 +128,7 @@ cd bth-ramverk2-gomoku
 npm install
 ```
 
-#### Start the application
+### Start the application
 
 ```bash
 npm start
@@ -121,13 +140,13 @@ That's it now you are all set.
 
 If you don't have a mongodb server already setup then this method using docker-compose will get you up and running in just a few steps.
 
-#### First clone the repo
+### First clone the repo
 
 ```bash
 git clone https://github.com/ptorn/bth-ramverk2-gomoku.git
 ```
 
-#### Start and stop using Docker
+### Start and stop using Docker
 
 Start the application and it's services as docker containers. This command will build the containers from scratch and build the application inside the express container. One container for the express-server and one for MongoDB.
 
@@ -140,13 +159,13 @@ npm run stop-docker   // Shutdown the services and containers.
 
 I have setup a chain for building the docker image for the application to save building time and ensure a functioning application for production.
 
-#### First clone the repo
+### First clone the repo
 
 ```bash
 git clone https://github.com/ptorn/bth-ramverk2-gomoku.git
 ```
 
-#### Start application
+### Start application
 This downloads a already built image of the application to run.
 
 ```bash
@@ -181,7 +200,7 @@ npm run stylelint   // Stylelint
 npm run test-watch  // Will re-run tests upon save while programming TDD.
 ```
 
-## Test using Docker
+## Testing using Docker
 
 By using Docker we can quickly spin-up a container running on different node servers to test and validate our code. This works great if you don't have a MongoDB database running since Docker will start one automatically for you.
 
@@ -193,7 +212,7 @@ npm run test-docker2        // Node version 8
 
 ## Code coverage
 
-#### Generate reports
+### Generate reports
 
 ```bash
 npm run mocha-nyc
@@ -219,19 +238,19 @@ The badges gives a good picture of the current status of a project. These tools 
 
 # Realtime
 
-#### WebSockets
+## WebSockets
 
 I decided to use native WebSockets to handle the real-time features of the application. The reason for this was simply that I wanted to understand the basics of WebSockets before I would add any extra layer over it.
 
 For this application it works really well. Data is very easily transmitted between the server and the clients connected. This makes it ideal for a realtime application such as this game and chat.
 
-#### Realtime fetures
+## Realtime fetures
 
 This application uses WebSockets for handling the game and the chat part of the application. For example when a player places a token on the board that data is being sent to the server that process it and then transmit the updated data from the server to every client connected to the server. When every client receives the new data the client will update and re-render the new data in real-time.
 
 The chat feature uses it to give the users the ability to chat with each other in real-time. A user sends a message that the server receives and then transmits it back to every user that is connected so the message is displayed in their chat window.
 
-#### Reflection
+## Reflection
 
 It's a great way to give an application the extra power of communicating real-time to ensure everyone is working with the latest data. This especially works great in a SPA(single-page-application) like this.
 
@@ -253,7 +272,15 @@ As a last step in my CI-Chain I added docker cloud. Once a commit has been valid
 
 I use this image to run my application on my production-server. This happens to be a great way for me to launch my application. I had some problems prior with a service provider that canceled my npm install script due to that it took to long to run. By just pulling down the latest image I get a fully functional container running the latest version of the application.
 
-[bth-ramver2-gomoku](https://www.npmjs.com/package/bth-mongodb-crud) on docker store.
+The benefit is that I'm confident that once my builds pass and docker-image is built that the application will run. There are no hands in between the CI-chain to production. Everything is fully automated. 
+
+Another benefit with a docker-container is that when developing or running the application regardless of the users setup it will still run in the same environment that it's built for.
+
+Running multiple tests with different containers for different versions of node like in this case ensures that the application works as intended for different versions by simply running one command.
+
+In production it's very convenient to have the application split up in multiple containers. Its very scalable and much easier to switch out parts for something else like the database. Containers also creates a layer of protection on the server since it creates its own environment that the application lives in and sepperates it from the rest of the system.
+
+[bth-ramver2-gomoku](https://store.docker.com/community/images/ptorn/bth-ramverk2-gomoku) on docker store.
 [Dockerfile](https://github.com/ptorn/bth-ramverk2-gomoku/blob/master/docker/Dockerfile_node_latest) on GitHub.
 
 To download the latest image from docker use this command with docker.

@@ -1,6 +1,6 @@
 let port = process.env.DBWEBB_PORT !== undefined ?
     process.env.DBWEBB_PORT :
-    "3001";
+    "3000";
 let server = () => {
     let hostname = document.location.hostname;
 
