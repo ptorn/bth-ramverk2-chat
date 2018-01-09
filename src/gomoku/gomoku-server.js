@@ -171,7 +171,11 @@ async function handleMessage(message, wss, ws) {
  */
 async function initServer() {
     updateRoomData();
-    roomData.history = await db.getHistory();
+    try {
+        roomData.history = await db.getHistory();
+    } catch (error) {
+        roomData.history = [];
+    }
 }
 
 
