@@ -183,6 +183,10 @@ export default class Gomoku extends Component {
     }
 
     gameFinished() {
+        this.setState((previousState) => {
+            previousState.game.player = "spectator";
+            return previousState;
+        });
         this.state.ws.send(JSON.stringify({
             type: "updateRoom",
         }));

@@ -248,6 +248,7 @@ async function handleClose(wss, ws) {
         updateRoomData();
         wss.clients.forEach((ws) => { delete ws.playerId; });
     }
+    updateRoomData();
     roomData.type = "updateRoom";
     broadcastExceptJSON(roomData, wss);
 }

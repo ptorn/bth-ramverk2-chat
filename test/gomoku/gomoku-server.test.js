@@ -140,8 +140,6 @@ describe('Test Web Socket.', function () {
             };
             done();
         });
-
-
         it('Get users', (done) => {
             let ws = new WebSocket("ws://127.0.0.1:3000", "json");
 
@@ -157,7 +155,6 @@ describe('Test Web Socket.', function () {
             };
             done();
         });
-
         it('Update room', (done) => {
             let ws = new WebSocket("ws://127.0.0.1:3000", "json");
 
