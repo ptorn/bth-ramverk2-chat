@@ -60,7 +60,7 @@ describe('Test Gomoku Board.', function () {
         });
         it('Check next player.', () => {
             expect(board.player).to.equal(1);
-            expect(board.placeMarker(5, 6)).to.be.true;
+            expect(board.placeMarker(5, 6)).to.equal(true);
             expect(board.player).to.equal(2);
         });
     });
@@ -71,67 +71,67 @@ describe('Test Gomoku Board.', function () {
             board.start();
         });
         it('Check winner, when 5 in a row Y-line', () => {
-            expect(board.placeMarker(1, 1)).to.be.true;
-            expect(board.placeMarker(2, 1)).to.be.true;
+            expect(board.placeMarker(1, 1)).to.equal(true);
+            expect(board.placeMarker(2, 1)).to.equal(true);
 
-            expect(board.placeMarker(1, 2)).to.be.true;
-            expect(board.placeMarker(2, 2)).to.be.true;
+            expect(board.placeMarker(1, 2)).to.equal(true);
+            expect(board.placeMarker(2, 2)).to.equal(true);
 
-            expect(board.placeMarker(1, 3)).to.be.true;
-            expect(board.placeMarker(2, 3)).to.be.true;
+            expect(board.placeMarker(1, 3)).to.equal(true);
+            expect(board.placeMarker(2, 3)).to.equal(true);
 
-            expect(board.placeMarker(1, 4)).to.be.true;
-            expect(board.placeMarker(2, 4)).to.be.true;
+            expect(board.placeMarker(1, 4)).to.equal(true);
+            expect(board.placeMarker(2, 4)).to.equal(true);
 
-            expect(board.placeMarker(1, 5)).to.be.false;
+            expect(board.placeMarker(1, 5)).to.equal(false);
             expect(() => { board.placeMarker(2, 5); }).to.throw();
         });
         it('Check winner, when 5 in a row X-line', () => {
-            expect(board.placeMarker(1, 1)).to.be.true;
-            expect(board.placeMarker(1, 2)).to.be.true;
+            expect(board.placeMarker(1, 1)).to.equal(true);
+            expect(board.placeMarker(1, 2)).to.equal(true);
 
-            expect(board.placeMarker(2, 1)).to.be.true;
-            expect(board.placeMarker(2, 2)).to.be.true;
+            expect(board.placeMarker(2, 1)).to.equal(true);
+            expect(board.placeMarker(2, 2)).to.equal(true);
 
-            expect(board.placeMarker(3, 1)).to.be.true;
-            expect(board.placeMarker(3, 2)).to.be.true;
+            expect(board.placeMarker(3, 1)).to.equal(true);
+            expect(board.placeMarker(3, 2)).to.equal(true);
 
-            expect(board.placeMarker(4, 1)).to.be.true;
-            expect(board.placeMarker(4, 2)).to.be.true;
+            expect(board.placeMarker(4, 1)).to.equal(true);
+            expect(board.placeMarker(4, 2)).to.equal(true);
 
-            expect(board.placeMarker(5, 1)).to.be.false;
+            expect(board.placeMarker(5, 1)).to.equal(false);
             expect(() => { board.placeMarker(5, 2); }).to.throw();
         });
         it('Check winner, when 5 in a row Minor', () => {
-            expect(board.placeMarker(5, 5)).to.be.true;
-            expect(board.placeMarker(1, 2)).to.be.true;
+            expect(board.placeMarker(5, 5)).to.equal(true);
+            expect(board.placeMarker(1, 2)).to.equal(true);
 
-            expect(board.placeMarker(4, 4)).to.be.true;
-            expect(board.placeMarker(2, 2)).to.be.true;
+            expect(board.placeMarker(4, 4)).to.equal(true);
+            expect(board.placeMarker(2, 2)).to.equal(true);
 
-            expect(board.placeMarker(3, 3)).to.be.true;
-            expect(board.placeMarker(3, 2)).to.be.true;
+            expect(board.placeMarker(3, 3)).to.equal(true);
+            expect(board.placeMarker(3, 2)).to.equal(true);
 
-            expect(board.placeMarker(6, 6)).to.be.true;
-            expect(board.placeMarker(4, 2)).to.be.true;
+            expect(board.placeMarker(6, 6)).to.equal(true);
+            expect(board.placeMarker(4, 2)).to.equal(true);
 
-            expect(board.placeMarker(7, 7)).to.be.false;
+            expect(board.placeMarker(7, 7)).to.equal(false);
             expect(() => { board.placeMarker(5, 2); }).to.throw();
         });
         it('Check winner, when 5 in a row Major', () => {
-            expect(board.placeMarker(5, 5)).to.be.true;
-            expect(board.placeMarker(1, 2)).to.be.true;
+            expect(board.placeMarker(5, 5)).to.equal(true);
+            expect(board.placeMarker(1, 2)).to.equal(true);
 
-            expect(board.placeMarker(6, 4)).to.be.true;
-            expect(board.placeMarker(2, 2)).to.be.true;
+            expect(board.placeMarker(6, 4)).to.equal(true);
+            expect(board.placeMarker(2, 2)).to.equal(true);
 
-            expect(board.placeMarker(7, 3)).to.be.true;
-            expect(board.placeMarker(3, 2)).to.be.true;
+            expect(board.placeMarker(7, 3)).to.equal(true);
+            expect(board.placeMarker(3, 2)).to.equal(true);
 
-            expect(board.placeMarker(4, 6)).to.be.true;
-            expect(board.placeMarker(4, 2)).to.be.true;
+            expect(board.placeMarker(4, 6)).to.equal(true);
+            expect(board.placeMarker(4, 2)).to.equal(true);
 
-            expect(board.placeMarker(3, 7)).to.be.false;
+            expect(board.placeMarker(3, 7)).to.equal(false);
             expect(() => { board.placeMarker(5, 2); }).to.throw();
         });
         it('Board is full with no winner', () => {
@@ -147,7 +147,7 @@ describe('Test Gomoku Board.', function () {
             board.board.push(2, 1, 2, 1, 2, 1, 2, 1, 2, 1);
             board.board.push(1, 2, 1, 2, 1, 2, 1, 2, 1, 2);
 
-            expect(board.checkWinner(9, 9)).to.be.true;
+            expect(board.checkWinner(9, 9)).to.equal(true);
             expect(board.winnerMsg).to.equal('No winner!');
         });
         it('Get game result. Player2 won.', () => {
@@ -178,7 +178,7 @@ describe('Test Gomoku Board.', function () {
                 }
             };
 
-            expect(board.checkWinner(9, 9)).to.be.true;
+            expect(board.checkWinner(9, 9)).to.equal(true);
             expect(board.getGameResult()).to.deep.equal(result);
         });
         it('Get game result. Player1 won.', () => {
@@ -211,7 +211,7 @@ describe('Test Gomoku Board.', function () {
             };
 
             board.player = 1;
-            expect(board.checkWinner(0, 9)).to.be.true;
+            expect(board.checkWinner(0, 9)).to.equal(true);
             expect(board.getGameResult()).to.deep.equal(result);
         });
     });
@@ -224,21 +224,21 @@ describe('Test Gomoku Board.', function () {
             board.playersGame.Player1 = "Joe";
         });
         it('PlayerSurrender that is not a player.', () => {
-            expect(board.playerSurrender("Jane")).to.be.false;
+            expect(board.playerSurrender("Jane")).to.equal(false);
         });
         it('PlayerSurrender player1.', () => {
-            expect(board.playerSurrender("Joe")).to.be.true;
+            expect(board.playerSurrender("Joe")).to.equal(true);
         });
         it('PlayerSurrender player1 but player2 is null', () => {
             board.playersGame.Player2 = null;
-            expect(board.playerSurrender("Joe")).to.be.false;
+            expect(board.playerSurrender("Joe")).to.equal(false);
         });
         it('PlayerSurrender player2 but player1 is null', () => {
             board.playersGame.Player1 = null;
-            expect(board.playerSurrender("James")).to.be.false;
+            expect(board.playerSurrender("James")).to.equal(false);
         });
         it('PlayerSurrender player2.', () => {
-            expect(board.playerSurrender("James")).to.be.true;
+            expect(board.playerSurrender("James")).to.equal(true);
         });
     });
 });

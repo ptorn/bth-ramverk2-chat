@@ -11,6 +11,9 @@ export const ConnectForm = (props) => {
                 buttonValue={"Enter"}
                 callback={props.callback}
             />
+            {props.status !== null &&
+                <div>{props.status}</div>
+            }
         </div>
     );
 };

@@ -37,9 +37,22 @@ export default class Gomoku extends Component {
 
     componentDidMount() {
         this.setState((previousState) => {
+            previousState.ws.onopen = () => {
+                this.state.ws.send(JSON.stringify({
+                    type: "getUsers",
+                }));
+            };
+
             previousState.ws.onmessage = (evt) => {
                 let data = JSON.parse(evt.data);
 
+                if (data.type === "connection") {
+                    this.setState((previousState) => {
+                        previousState.connected = data.status;
+                        previousState.nick = data.nick;
+                        return previousState;
+                    });
+                }
                 if (data.type === "message") {
                     this.setState((previousState) => {
                         return previousState.chat.messages.push(data.message);
@@ -67,12 +80,14 @@ export default class Gomoku extends Component {
                 }
                 if (data.type === "updateRoom") {
                     this.setState((previousState) => {
+                        if (data.message !== null) {
+                            previousState.chat.messages.push(data.message);
+                        }
                         previousState.chat.users = data.users;
                         previousState.game.board = data.game.board;
                         previousState.game.size = data.game.size;
                         previousState.game.winner = data.game.winner;
                         previousState.game.currentPlayer = data.game.currentPlayer;
-                        previousState.game.player = "spectator";
                         previousState.game.players = data.game.players;
                         previousState.history = data.history;
                         return previousState;
@@ -83,7 +98,10 @@ export default class Gomoku extends Component {
                         previousState.game.board = data.game.board;
                         previousState.game.size = data.game.size;
                         previousState.game.winner = data.game.winner;
+                        previousState.game.currentPlayer = data.game.currentPlayer;
                         previousState.game.players = data.game.players;
+                        previousState.game.player = "spectator";
+                        previousState.history = data.history;
                         return previousState;
                     });
                 }
@@ -95,32 +113,6 @@ export default class Gomoku extends Component {
                         });
                     }
                 }
-                if (data.type === "updatePlayers") {
-                    this.setState((previousState) => {
-                        previousState.game.players = data.game.players;
-                        previousState.game.currentPlayer = data.game.currentPlayer;
-                        previousState.chat.messages.push(data.message);
-                        return previousState;
-                    });
-                }
-                if (data.type === "gamePlay") {
-                    let player = this.state.game.player;
-
-                    if (data.game.winner !== null) {
-                        player = "spectator";
-                    }
-                    this.setState((previousState) => {
-                        return previousState.game = {
-                            board: data.game.board,
-                            size: data.game.size,
-                            winner: data.game.winner,
-                            currentPlayer: data.game.currentPlayer,
-                            player: player,
-                            players: previousState.game.players,
-                            history: data.history
-                        };
-                    });
-                }
             };
             return previousState;
         });
@@ -128,21 +120,23 @@ export default class Gomoku extends Component {
 
     componentWillUnmount() {
         this.state.ws.close();
+        this.setState((previousState) => {
+            previousState.game.player = null;
+            previousState.game.player = "";
+            return previousState;
+        });
     }
 
     connect(content) {
+        this.state.ws.send(JSON.stringify({
+            type: "getUsers",
+        }));
         if (content === "") {
             throw Error("Field is empty!");
         }
         if (this.state.chat.users.indexOf(content) !== -1) {
             throw Error("Nick is already taken!");
         }
-        this.setState((previousState) => {
-            previousState.connected = true;
-            previousState.nick = content;
-
-            return previousState;
-        });
         this.state.ws.send(JSON.stringify({
             type: "createUser",
             user: {
@@ -188,6 +182,12 @@ export default class Gomoku extends Component {
         }));
     }
 
+    gameFinished() {
+        this.state.ws.send(JSON.stringify({
+            type: "updateRoom",
+        }));
+    }
+
     render() {
         let callback = this.state.game.winner === null ? this.placeToken : () => null;
         let setPlayer = this.state.game.player === "spectator" ? this.setPlayer : () => null;
@@ -198,8 +198,7 @@ export default class Gomoku extends Component {
                     <h1>BTH-Gomoku</h1>
                     {this.state.game.player !== null &&
                         <div>
-                            {(this.state.game.board.length === 0 ||
-                                this.state.game.winner !== null) &&
+                            {this.state.game.board.length === 0 &&
                             <div className="start-game center-div">
                                 <div>
                                     <h3>
@@ -214,10 +213,28 @@ export default class Gomoku extends Component {
                                 </button>
                             </div>
                             }
+                            {(this.state.game.board.length > 0 &&
+                            this.state.game.winner !== null) &&
+                                <div className="start-game center-div">
+                                    <div>
+                                        <h3>
+                                            Player {this.state.game.winner} won, congratulations!
+                                        </h3>
+                                    </div>
+                                    <button
+                                        className="enter"
+                                        onClick={() => {
+                                            this.gameFinished();
+                                        }} >
+                                        Continue
+                                    </button>
+                                </div>
+                            }
                         </div>
                     }
-                    { this.state.game.player !== null &&
+                    { this.state.nick !== "" &&
                     <div className="col-md-7 pl-0 pr-0">
+
                         <GomokuBoard
                             size={this.state.game.size}
                             board={this.state.game.board}
@@ -225,12 +242,16 @@ export default class Gomoku extends Component {
                         />
                     </div>
                     }
+                    {this.state.game.player !== null &&
+                        this.state.nick !== "" &&
                     <GomokuSidebar
                         setPlayer={setPlayer}
                         game={this.state.game}
                         history={this.state.history}
                         currentPlayer={this.state.game.currentPlayer}
                     />
+                    }
+
                     <Chat
                         connect={this.connect}
                         users={this.state.chat.users}

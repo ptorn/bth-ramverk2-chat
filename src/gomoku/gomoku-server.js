@@ -19,9 +19,37 @@ async function handleMessage(message, wss, ws) {
 
     updateRoomData();
     switch (data.type) {
+        case "getUsers":
+            broadcastClientJSON({
+                type: "userList",
+                users: users.users
+            }, wss, ws);
+            break;
+        case "updateRoom":
+            roomData.type = "updateRoom";
+            updateRoomData();
+            broadcastClientJSON(roomData, wss, ws);
+            break;
         case "createUser":
-            users.createUser(data.user.nick);
+            try {
+                users.createUser(data.user.nick);
+            } catch (error) {
+                broadcastClientJSON({
+                    type: "connection",
+                    status: false,
+                    nick: data.user.nick,
+                    users: users.users
+                }, wss, ws);
+                break;
+            }
+            broadcastClientJSON({
+                type: "connection",
+                status: true,
+                nick: data.user.nick,
+                users: users.users
+            }, wss, ws);
             ws.nick = data.user.nick;
+            updateRoomData();
             broadcastAllJSON({
                 type: "userList",
                 users: users.users
@@ -30,7 +58,6 @@ async function handleMessage(message, wss, ws) {
                 message: "Welcome to the Gomoku chat " + data.user.nick,
                 nick: "",
                 time: Date.now()
-
             };
             roomData.type = "enterRoom";
             broadcastClientJSON(roomData, wss, ws);
@@ -42,8 +69,9 @@ async function handleMessage(message, wss, ws) {
                     time: Date.now()
                 }
             }, wss, ws);
-            roomData.message = "";
             break;
+
+
         case "message":
             if (data.message !== "") {
                 broadcastAllJSON({
@@ -56,6 +84,8 @@ async function handleMessage(message, wss, ws) {
                 }, wss);
             }
             break;
+
+
         case "createGame":
             board.init(data.size);
             board.start();
@@ -63,30 +93,47 @@ async function handleMessage(message, wss, ws) {
             roomData.type = "gameStart";
             broadcastAllJSON(roomData, wss);
             break;
+
+
         case "placeToken":
             if (data.player === board.player) {
-                board.placeMarker(data.position.x, data.position.y);
+                try {
+                    board.placeMarker(data.position.x, data.position.y);
+                } catch (error) {
+                    broadcastClientJSON({
+                        type: "message",
+                        message: {
+                            message: error.message,
+                            nick: "",
+                            time: Date.now()
+                        }
+                    }, wss, ws);
+                }
             }
-            roomData.type = "gamePlay";
-            updateRoomData();
             if (board.winner !== null) {
                 // Update history with new winner
                 await db.addGameData('history', board.getGameResult());
                 roomData.history = await db.getHistory();
-                broadcastAllJSON({
-                    type: "message",
-                    message: {
-                        message: board.winnerMsg +
-                            " Great played " +
-                            board.playersGame['Player' + board.winner],
-                        nick: "",
-                        time: Date.now()
-                    }
-                }, wss, ws);
+                roomData.message = {
+                    message: board.winnerMsg +
+                        " Great played " +
+                        board.playersGame['Player' + board.winner],
+                    nick: "",
+                    time: Date.now()
+                };
+                roomData.type = "updateRoom";
+                updateRoomData();
+                broadcastAllJSON(roomData, wss);
+                wss.clients.forEach((ws) => { delete ws.playerId; });
                 board.reset();
+                break;
             }
+            roomData.type = "updateRoom";
+            updateRoomData();
             broadcastAllJSON(roomData, wss);
             break;
+
+
         case "setPlayer":
             var status = 1;
 
@@ -103,7 +150,7 @@ async function handleMessage(message, wss, ws) {
             }, wss, ws);
 
             updateRoomData();
-            roomData.type = "updatePlayers";
+            roomData.type = "updateRoom";
             roomData.message = {
                 nick: "",
                 time: Date.now(),
@@ -113,6 +160,7 @@ async function handleMessage(message, wss, ws) {
             break;
         default:
     }
+    roomData.message = null;
 }
 
 

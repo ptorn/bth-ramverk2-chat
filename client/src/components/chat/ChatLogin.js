@@ -22,10 +22,8 @@ export default class Connect extends Component {
                 {!this.props.connected &&
                     <ConnectForm
                         callback = {this.login.bind(this)}
+                        status = {this.state.status}
                     />
-                }
-                {this.state.status !== null &&
-                    <div>{this.state.status}</div>
                 }
                 {this.props.connected &&
                     <ChatForm

@@ -63,7 +63,8 @@ let board = {
      * @return {void}
      */
     reset: function() {
-        this.board = [];
+        this.size = 0,
+        this.board = [],
         this.player = 0;
         this.winner = null;
         this.winnerMsg = null;

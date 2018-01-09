@@ -76,6 +76,11 @@ describe('Test Web Socket.', function () {
                     size: 10
                 }));
             };
+            ws.onmessage = (evt) => {
+                let data = JSON.parse(evt.data);
+
+                expect(data.type).to.equal("gameStart");
+            };
             done();
         });
         it('Set player websocket', (done) => {
@@ -86,6 +91,11 @@ describe('Test Web Socket.', function () {
                     type: "setPlayer",
                     playerId: 1
                 }));
+            };
+            ws.onmessage = (evt) => {
+                let data = JSON.parse(evt.data);
+
+                expect(data.type).to.equal("setPlayer");
             };
             done();
         });
@@ -102,6 +112,11 @@ describe('Test Web Socket.', function () {
                     }
                 }));
             };
+            ws.onmessage = (evt) => {
+                let data = JSON.parse(evt.data);
+
+                expect(data.type).to.equal("updateRoom");
+            };
             done();
         });
         it('Place token for winner websocket', (done) => {
@@ -117,6 +132,44 @@ describe('Test Web Socket.', function () {
                         y: 0
                     }
                 }));
+            };
+            ws.onmessage = (evt) => {
+                let data = JSON.parse(evt.data);
+
+                expect(data.type).to.equal("updateRoom");
+            };
+            done();
+        });
+
+
+        it('Get users', (done) => {
+            let ws = new WebSocket("ws://127.0.0.1:3000", "json");
+
+            ws.onopen = function () {
+                ws.send(JSON.stringify({
+                    type: "getUsers",
+                }));
+            };
+            ws.onmessage = (evt) => {
+                let data = JSON.parse(evt.data);
+
+                expect(data.type).to.equal("updateRoom");
+            };
+            done();
+        });
+
+        it('Update room', (done) => {
+            let ws = new WebSocket("ws://127.0.0.1:3000", "json");
+
+            ws.onopen = function () {
+                ws.send(JSON.stringify({
+                    type: "updateRoom",
+                }));
+            };
+            ws.onmessage = (evt) => {
+                let data = JSON.parse(evt.data);
+
+                expect(data.type).to.equal("updateRoom");
             };
             done();
         });
