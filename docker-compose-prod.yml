@@ -1,9 +1,6 @@
 version: '3'
 services:
     gomoku_express:
-    #    build:
-    #        context: .
-    #        dockerfile: docker/Dockerfile_node_latest
         image: ptorn/bth-ramverk2-gomoku:latest
 
         environment:
