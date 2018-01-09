@@ -65,6 +65,9 @@ This article is written by Peder Tornberg.
 ## Sources
 
 [React (JavaScript library)](https://en.wikipedia.org/wiki/React_(JavaScript_library))
+
 [Top JavaScript Libraries & Tech to Learn in 2018](https://medium.com/javascript-scene/top-javascript-libraries-tech-to-learn-in-2018-c38028e028e6)
+
 [JSX In Depth](https://reactjs.org/docs/jsx-in-depth.html)
+
 [React Component](https://reactjs.org/docs/react-component.html)
