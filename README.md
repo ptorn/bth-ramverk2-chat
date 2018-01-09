@@ -114,6 +114,8 @@ DBWEBB_WSSERVER=loalhost:3000
 
 The values used in these examples are the default values.
 
+Default url for the application is `http://localhost:3000`.
+
 ## Installation method 1
 
 ### First clone the repo
